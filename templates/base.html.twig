@@ -28,7 +28,7 @@
                 <ul class="navbar-nav mr-auto">
                     {% if is_granted('ROLE_USER') %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('student_index') }}">{{ 'Category'|trans }}</a>
+                            <a class="nav-link" href="{{ path('default') }}">{{ 'Default'|trans }}</a>
                         </li>
                     {% endif %}
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
