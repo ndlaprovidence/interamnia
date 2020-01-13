@@ -167,15 +167,15 @@
       </trans-unit>
       <trans-unit id="DZO3ehf" resname="Edit Student">
         <source>Edit Student</source>
-        <target>Modifier la catégorie</target>
+        <target>Modifier l'élève</target>
       </trans-unit>
       <trans-unit id="Ogh45Pp" resname="New Student">
         <source>New Student</source>
-        <target>Nouvelle catégorie</target>
+        <target>Nouvel élève</target>
       </trans-unit>
       <trans-unit id="KSwG8AR" resname="Student">
         <source>Student</source>
-        <target>Catégorie</target>
+        <target>Elève</target>
       </trans-unit>
       <trans-unit id="zI.Z63_" resname="Welcome!">
         <source>Welcome!</source>
