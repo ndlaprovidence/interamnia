@@ -16,11 +16,16 @@
 }
 
 .title {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Seymour One', sans-serif;
     font-size: 30px;
     text-align: center;
 }
 
 .bg-danger {
     background-color: #c52233 !important;
+    border-bottom-color: black;
+    border-bottom-style: solid;
+    border-bottom-width: 5px;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
 }
