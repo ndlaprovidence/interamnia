@@ -3,6 +3,10 @@
     /* text-align: center; */
 }
 
+.container {
+    margin-left: 0% !important;
+}
+
 .btn {
     margin: 3px;
 }
@@ -29,3 +33,49 @@
     padding-top: 1rem !important;
     padding-bottom: 1rem !important;
 }
+
+.afficher_entreprises {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.afficher_entreprises td, .afficher_entreprise th {
+    border: 1px solid #ddd !important;
+    padding: 8px;
+}
+
+.afficher_entreprises tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.afficher_entreprises tr:hover {
+    background-color: #ddd;
+}
+
+.afficher_entreprises th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #c52233 !important;
+    color: white;
+  }
+
+  .col-sm-4 {
+      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+      background-color: #cdd3d5;
+  }
+
+  .col-sm-4 h3 {
+      margin-bottom: 2rem;
+  }
+
+  .col-sm-4 input[type=submit] {
+    background-color: #c52233;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+  }

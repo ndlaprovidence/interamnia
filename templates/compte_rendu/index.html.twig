@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CompteRendu{% endblock %}
+
+{% block body %}
+
+<div class="compte-rendu">
+    <h1>Compte-rendu de stage :</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.date_debut) }}
+        {{ form_row(form.date_fin) }}
+        {{ form_row(form.classe_eleve) }}
+        {{ form_row(form.theme) }}
+        {{ form_row(form.commentaire) }}
+        {{ form_row(form.user) }}
+
+        <button type="submit">Ajouter</button>
+    {{ form_end(form) }}
+
+</div>
+{% endblock %}

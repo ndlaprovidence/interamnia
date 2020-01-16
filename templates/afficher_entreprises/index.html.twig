@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AfficherEntreprises{% endblock %}
+
+{% block body %}
+
+{% if {{ path('recherche_approfondie') }} %}
+    <a class="nav-link" href="{{ path('recherche_approfondie') }}">{{ 'Recherche Approfondie' }}</a>
+    {{ form_start(data) }}
+        {{ form_row(data.name) }}
+        {{ form_row(data.email) }}
+        {{ form_row(data.message) }}
+
+        <button type="submit">Rechercher</button>
+    {{ form_end(data) }}
+{% endif %}
+
+<div class="container" style="margin-top:30px">
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Recherche Approfondie</h3>
+            <ul class="nav nav-pills flex-column">
+             <form>
+                Nom:<br>
+                <input type="text" name="nom"><br>
+                Région:<br>
+                <input type="text" name="region"><br>
+                Ville:<br>
+                <input type="text" name="ville"><br>
+                <br>
+                <input type="submit" value="Rechercher"><br>
+                <br>
+            </form> 
+            </ul>
+            <hr class="d-sm-none">
+        </div>
+        <div class="col-sm-8">
+            <div class="afficher_entreprises">
+                <h1>Entreprises :</h1>
+
+                <table>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Code Postal</th>
+                            <th>Ville</th>
+                            <th>Rue</th>
+                            <th>Téléphone</th>
+                            <th>Email</th>
+                            <th>Taille</th>
+                            <th>Activité</th>
+                            <th>Contact</th>
+                        </tr>
+                    {% for element in listeEntreprises %}
+                        <tr>
+                            <td>{{ element.nom }}</td>
+                            <td>{{ element.cp }}</td>
+                            <td>{{ element.ville }}</td>
+                            <td>{{ element.rue }}</td>
+                            <td>{{ element.telephone }}</td>
+                            <td>{{ element.email }}</td>
+                            <td>{{ element.taille }}</td>
+                            <td>{{ element.activite }}</td>
+                            <td>{{ element.contact }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

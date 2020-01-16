@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entreprise{% endblock %}
+
+{% block body %}
+
+<div class="entreprise">
+    <h1>Ajouter une entreprise :</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.cp) }}
+        {{ form_row(form.ville) }}
+        {{ form_row(form.rue) }}
+        {{ form_row(form.telephone) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.taille) }}
+        {{ form_row(form.activite) }}
+        {{ form_row(form.contact) }}
+
+        <button type="submit">Ajouter</button>
+    {{ form_end(form) }}
+
+</div>
+{% endblock %}
