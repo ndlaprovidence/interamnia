@@ -16,6 +16,7 @@ class EntrepriseController extends Controller
      */
     public function addCompany(Request $request)
     {
+        
         $entreprise = new Entreprise();
         $form = $this->createForm(EntrepriseType::class, $entreprise);
 
