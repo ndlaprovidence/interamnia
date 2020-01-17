@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CompteRendu index{% endblock %}
+
+{% block body %}
+    <h1>Compte-rendu du stage</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Classe élève</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Thème du stage</th>
+                <th>Commentaire</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for compte_rendu in compte_rendus %}
+            <tr>
+                <td>{{ compte_rendu.id }}</td>
+                <td>{{ compte_rendu.classeEleve }}</td>
+                <td>{{ compte_rendu.dateDebut }}</td>
+                <td>{{ compte_rendu.dateFin }}</td>
+                <td>{{ compte_rendu.theme }}</td>
+                <td>{{ compte_rendu.commentaire }}</td>
+                <td>
+                    <a href="{{ path('compte_rendu_show', {'id': compte_rendu.id}) }}">Afficher</a>
+                    <a href="{{ path('compte_rendu_edit', {'id': compte_rendu.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucune donnée trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('compte_rendu_new') }}">Créer</a>
+{% endblock %}

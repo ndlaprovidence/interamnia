@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entreprise index{% endblock %}
+
+{% block body %}
+    <h1>Entreprise</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Code postal</th>
+                <th>Ville</th>
+                <th>Rue</th>
+                <th>Téléphone</th>
+                <th>E-mail</th>
+                <th>Activité</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entreprise in entreprises %}
+            <tr>
+                <td>{{ entreprise.id }}</td>
+                <td>{{ entreprise.nom }}</td>
+                <td>{{ entreprise.codePostal }}</td>
+                <td>{{ entreprise.ville }}</td>
+                <td>{{ entreprise.rue }}</td>
+                <td>{{ entreprise.telephone }}</td>
+                <td>{{ entreprise.email }}</td>
+                <td>{{ entreprise.activite }}</td>
+                <td>
+                    <a href="{{ path('entreprise_show', {'id': entreprise.id}) }}">Afficher</a>
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <a href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">Modifier</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Aucune donnée trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <a href="{{ path('entreprise_new') }}">Créer</a>
+    {% endif %}
+    <br>
+    <a href="{{ path('entreprise_search') }}">Recherche approndie</a>
+{% endblock %}
