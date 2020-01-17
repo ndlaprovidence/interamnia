@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="tbl_entreprise")
  * @ORM\Entity(repositoryClass="App\Repository\EntrepriseRepository")
  */
 class Entreprise
@@ -55,11 +56,6 @@ class Entreprise
      * @ORM\Column(type="string", length=255)
      */
     private $activite;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Contact", cascade={"persist", "remove"})
-     */
-    private $contact;
 
     public function getId(): ?int
     {
@@ -158,18 +154,6 @@ class Entreprise
     public function setActivite(string $activite): self
     {
         $this->activite = $activite;
-
-        return $this;
-    }
-
-    public function getContact(): ?Contact
-    {
-        return $this->contact;
-    }
-
-    public function setContact(?Contact $contact): self
-    {
-        $this->contact = $contact;
 
         return $this;
     }

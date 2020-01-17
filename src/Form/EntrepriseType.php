@@ -25,7 +25,7 @@ class EntrepriseType extends AbstractType
             ->add('email')
             ->add('taille')
             ->add('activite')
-            ->add('contact')
+            // ->add('contact')
         ;
     }
 

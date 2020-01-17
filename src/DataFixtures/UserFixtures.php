@@ -21,6 +21,8 @@ class UserFixtures extends Fixture
     {
         $user = new User();
         $user->setEmail('superadmin@domain.tld'); 
+        $user->setNom('Super administrateur');
+        $user->setPrenom('Super Admin');
         $user->setRoles(['ROLE_SUPER_ADMIN']);
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
@@ -30,6 +32,8 @@ class UserFixtures extends Fixture
 
         $user = new User();
         $user->setEmail('admin@domain.tld'); 
+        $user->setNom('Administrateur');   
+        $user->setPrenom('Admin');     
         $user->setRoles(['ROLE_ADMIN']);
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
@@ -39,6 +43,8 @@ class UserFixtures extends Fixture
 
         $user = new User();
         $user->setEmail('user@domain.tld'); 
+        $user->setNom('Utilisateur');     
+        $user->setPrenom('User');   
         $user->setRoles(['ROLE_USER']);
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,

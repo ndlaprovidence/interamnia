@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="tbl_contact")
  * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
  */
 class Contact

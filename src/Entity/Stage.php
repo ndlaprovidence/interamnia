@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="tbl_stage")
  * @ORM\Entity(repositoryClass="App\Repository\StageRepository")
  */
 class Stage

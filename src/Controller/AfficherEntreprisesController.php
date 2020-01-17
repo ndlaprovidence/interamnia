@@ -29,28 +29,20 @@ class AfficherEntreprisesController extends AbstractController
     }
 
     /**
-     * @Route("/stage", name="recherche_approfondie") 
+     * @Route("/stage", name="recherche_approfondie")
      */
-
-    public function RechercheApprofondie(Request $request)
+    public function rechercheApprofondie(Request $request)
     {
-        $defaultData = ['message' => 'Type your message here'];
-        $form = $this->createFormBuilder($defaultData)
-            ->add('name', TextType::class)
-            ->add('email', EmailType::class)
-            ->add('message', TextareaType::class)
-            ->add('send', SubmitType::class)
-            ->getForm();
-    
-        $form->handleRequest($request);
-    
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-        }
+        $article = new Article();
 
-        return $this->render(
-            'afficher_entreprises/index.html.twig',
-            array('data' => $data)
-        );
+        $form = $this->createFormBuilder($article)
+                     ->add('Nom')
+                     ->add('Région')
+                     ->add('Ville')
+                     ->getForm();
+        return $this->render('afficher_entreprise/index.html.twig', [
+            'formArticle' => $form->createView()
+        ]);
+
     }
 }
