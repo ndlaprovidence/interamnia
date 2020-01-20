@@ -91,22 +91,4 @@ class EntrepriseController extends AbstractController
 
         return $this->redirectToRoute('entreprise_index');
     }
-
-    /**
-     * @Route("/search", name="entreprise_search")
-     */
-    public function search(Request $request): Response
-    {
-        $recherche = new Recherche();
-
-        $form = $this->createFormBuilder($recherche)
-                     ->add('Nom')
-                     ->add('Région')
-                     ->add('Ville')
-                     ->getForm();
-
-        return $this->render('entreprise/search.html.twig', [
-            'formSearch' => $form->createView(),
-        ]);
-    }
 }
