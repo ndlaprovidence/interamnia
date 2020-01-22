@@ -19,6 +19,34 @@ class EntrepriseRepository extends ServiceEntityRepository
         parent::__construct($registry, Entreprise::class);
     }
 
+    /**
+     * @return Query
+     */
+    public function findAllVisibleQuery(Entreprise $search): Query
+    {
+        $query = $this->findVisibleQuery();
+        
+        if ($search->getNomEntreprise()) {
+            $query = $query
+                ->where('e.nom = :nomEntreprise')
+                ->setParameter('nomEntreprise', $search->getNomEntreprise());
+        }
+
+        if ($search->getRegionEntreprise()) {
+            $query = $query
+                ->where('e.region = :regionEntreprise')
+                ->setParameter('regionEntreprise', $search->getRegionEntreprise());
+        }
+
+        if ($search->getVilleEntreprise()) {
+            $query = $query
+                ->where('e.ville = :villeEntreprise')
+                ->setParameter('villeEntreprise', $search->getVilleEntreprise());
+        }
+        
+        return $query->getQuery();
+    }
+
     // /**
     //  * @return Entreprise[] Returns an array of Entreprise objects
     //  */

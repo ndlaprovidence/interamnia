@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Entreprise;
+use App\Entity\RechercheEntreprise;
 use App\Form\EntrepriseType;
+use App\Form\RechercheEntrepriseType;
 use App\Repository\EntrepriseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,10 +21,17 @@ class EntrepriseController extends AbstractController
     /**
      * @Route("/", name="entreprise_index", methods={"GET"})
      */
-    public function index(EntrepriseRepository $entrepriseRepository): Response
+    public function index(Request $request, EntrepriseRepository $entrepriseRepository): Response
     {
+        $search = new RechercheEntreprise();
+        $form = $this->createForm(RechercheEntrepriseType::class, $search);
+        $form->handleRequest($request);
+
+        $entreprises = $entrepriseRepository->findAllVisibleQuery($search);
+
         return $this->render('entreprise/index.html.twig', [
-            'entreprises' => $entrepriseRepository->findAll(),
+            'formSearch' => $form->createView(),
+            'entreprises' => $entreprises
         ]);
     }
 

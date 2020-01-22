@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @ORM\Table(name="tbl_entreprise")
  * @ORM\Entity(repositoryClass="App\Repository\EntrepriseRepository")
@@ -21,6 +20,11 @@ class Entreprise
      * @ORM\Column(type="string", length=255)
      */
     private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $region;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -65,6 +69,18 @@ class Entreprise
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getRegion(): ?string
+    {
+        return $this->region;
+    }
+
+    public function setRegion(string $region): self
+    {
+        $this->region = $region;
 
         return $this;
     }

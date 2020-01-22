@@ -1,21 +1,20 @@
 <?php
-
 namespace App\Entity;
 
-use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
-class RechercheEntreprise
-{
+class RechercheEntreprise {
+
     /**
      * @var string|null
      */
     private $nomEntreprise;
-    
+
     /**
      * @var string|null
      */
     private $regionEntreprise;
-    
+
     /**
      * @var string|null
      */
@@ -24,7 +23,7 @@ class RechercheEntreprise
     /**
      * @return string|null
      */
-    public function getNomEntreprise(): ?string
+    public function getNomEntreprise(): ?string 
     {
         return $this->nomEntreprise;
     }
@@ -33,7 +32,7 @@ class RechercheEntreprise
      * @param string|null $nomEntreprise
      * @return RechercheEntreprise
      */
-    public function setNomEntreprise(string $nomEntreprise): RechercheEntreprise
+    public function setNomEntreprise(?string $nomEntreprise): RechercheEntreprise
     {
         $this->nomEntreprise = $nomEntreprise;
         return $this;
@@ -42,7 +41,7 @@ class RechercheEntreprise
     /**
      * @return string|null
      */
-    public function getRegionEntreprise(): ?string
+    public function getRegionEntreprise(): ?string 
     {
         return $this->regionEntreprise;
     }
@@ -51,7 +50,7 @@ class RechercheEntreprise
      * @param string|null $regionEntreprise
      * @return RechercheEntreprise
      */
-    public function setRegionEntreprise(string $regionEntreprise): RechercheEntreprise
+    public function setRegionEntreprise(?string $regionEntreprise): RechercheEntreprise
     {
         $this->regionEntreprise = $regionEntreprise;
         return $this;
@@ -60,7 +59,7 @@ class RechercheEntreprise
     /**
      * @return string|null
      */
-    public function getVilleEntreprise(): ?string
+    public function getVilleEntreprise(): ?string 
     {
         return $this->villeEntreprise;
     }
@@ -69,7 +68,7 @@ class RechercheEntreprise
      * @param string|null $villeEntreprise
      * @return RechercheEntreprise
      */
-    public function setVilleEntreprise(string $villeEntreprise): RechercheEntreprise
+    public function setVilleEntreprise(?string $villeEntreprise): RechercheEntreprise
     {
         $this->villeEntreprise = $villeEntreprise;
         return $this;

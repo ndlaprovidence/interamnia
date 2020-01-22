@@ -4,30 +4,30 @@ namespace App\Form;
 
 use App\Entity\RechercheEntreprise;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\StringType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class RechercheEntrepriseType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nomEntreprise', StringType::class, [
+            ->add('nomEntreprise', TextType::class, [
                 'required' => false,
                 'label' => false,
                 'attr' => [
                     'placeholder' => "Nom de l'entreprise"
                 ]
             ])
-            ->add('regionEntreprise', StringType::class, [
+            ->add('regionEntreprise', TextType::class, [
                 'required' => false,
                 'label' => false,
                 'attr' => [
                     'placeholder' => "Région de l'entreprise"
                 ]
             ])
-            ->add('villeEntreprise', StringType::class, [
+            ->add('villeEntreprise', TextType::class, [
                 'required' => false,
                 'label' => false,
                 'attr' => [
@@ -44,5 +44,10 @@ class RechercheEntrepriseType extends AbstractType
             'method' => 'get',
             'csrf_protection' => false,
         ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return '';
     }
 }
