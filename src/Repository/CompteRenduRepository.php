@@ -19,6 +19,23 @@ class CompteRenduRepository extends ServiceEntityRepository
         parent::__construct($registry, CompteRendu::class);
     }
 
+    public function findDataOfStudent()
+    {
+        
+    }
+
+    public function findDataOfCompany()
+    {
+        $query = $entityManager->createQuery(
+            'SELECT c.eleve
+            FROM App\Entity\CompteRendu c
+            INNER JOIN c.entreprise e
+            WHERE c.entreprise :entreprise'
+        );
+
+        return $query->getOneOrNullResult();
+    }
+
     // /**
     //  * @return CompteRendu[] Returns an array of CompteRendu objects
     //  */

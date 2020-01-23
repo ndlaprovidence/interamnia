@@ -2,30 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\CompteRendu;
+use App\Entity\Eleve;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CompteRenduType extends AbstractType
+class EleveType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date_debut')
-            ->add('date_fin')
-            ->add('theme')
-            ->add('commentaire')
-            ->add('eleve')
-            ->add('prof')
-            ->add('entreprise')
+            ->add('nom')
+            ->add('prenom')
+            ->add('email')
+            ->add('bts')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => CompteRendu::class,
+            'data_class' => Eleve::class,
         ]);
     }
 }

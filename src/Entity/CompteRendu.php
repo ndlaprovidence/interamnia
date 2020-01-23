@@ -20,11 +20,6 @@ class CompteRendu
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $classe_eleve;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $date_debut;
 
     /**
@@ -41,12 +36,6 @@ class CompteRendu
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $commentaire;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Entreprise")
@@ -69,18 +58,6 @@ class CompteRendu
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getClasseEleve(): ?string
-    {
-        return $this->classe_eleve;
-    }
-
-    public function setClasseEleve(string $classe_eleve): self
-    {
-        $this->classe_eleve = $classe_eleve;
-
-        return $this;
     }
 
     public function getDateDebut(): ?string
@@ -127,18 +104,6 @@ class CompteRendu
     public function setCommentaire(?string $commentaire): self
     {
         $this->commentaire = $commentaire;
-
-        return $this;
-    }
-
-    public function getUser(): ?user
-    {
-        return $this->user;
-    }
-
-    public function setUser(?user $user): self
-    {
-        $this->user = $user;
 
         return $this;
     }

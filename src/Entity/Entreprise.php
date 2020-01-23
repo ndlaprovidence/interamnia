@@ -57,7 +57,8 @@ class Entreprise
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\ActiviteEntreprise")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $activite;
 
@@ -162,15 +163,19 @@ class Entreprise
         return $this;
     }
 
-    public function getActivite(): ?string
+    public function getActivite(): ?ActiviteEntreprise
     {
         return $this->activite;
     }
 
-    public function setActivite(string $activite): self
+    public function setActivite(?ActiviteEntreprise $activite): self
     {
         $this->activite = $activite;
 
         return $this;
+    }
+
+    public function __toString() {
+        return $this->nom;
     }
 }

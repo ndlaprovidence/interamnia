@@ -28,12 +28,8 @@ class EntrepriseController extends AbstractController
         $form = $this->createForm(RechercheEntrepriseType::class, $search);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entreprises = $entrepriseRepository->findAllVisibleQuery($search);
-        }
-        else {
-            $entreprises = $entrepriseRepository->findAll();
-        }
+        $entreprises = $entrepriseRepository->findAllVisibleQuery($search);
+        
         return $this->render('entreprise/index.html.twig', [
             'entreprises' => $entreprises,
             'formSearch' => $form->createView()

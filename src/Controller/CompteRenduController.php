@@ -91,4 +91,32 @@ class CompteRenduController extends AbstractController
 
         return $this->redirectToRoute('compte_rendu_index');
     }
+
+    /**
+     * @Route("/eleve", name="compte_rendu_eleve", methods={"GET"})
+     */
+    public function eleve()
+    {
+        $eleve = $compterenduRepository->findDataEleve();
+
+        return $this->render('compte_rendu/eleve.html.twig', [
+            
+        ]);
+    }
+
+    /**
+     * @Route("/entreprise", name="compte_rendu_entreprise", methods={"GET"})
+     */
+    public function entreprise()
+    {
+        $entreprise = $this->getDoctrine()
+            ->getRepository(CompteRendu::class)
+            ->findDataOfCompany();
+
+        $eleves = $entreprise-getEleve();
+
+        return $this->render('compte_rendu/entreprise.html.twig', [
+            
+        ]);
+    }
 }

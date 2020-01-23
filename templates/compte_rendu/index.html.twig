@@ -9,7 +9,8 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Classe élève</th>
+                <th>Élève</th>
+                <th>Entreprise</th>
                 <th>Date de début</th>
                 <th>Date de fin</th>
                 <th>Thème du stage</th>
@@ -21,7 +22,8 @@
         {% for compte_rendu in compte_rendus %}
             <tr>
                 <td>{{ compte_rendu.id }}</td>
-                <td>{{ compte_rendu.classeEleve }}</td>
+                <td><a href="{{ path('compte_rendu_eleve') }}">{{ compte_rendu.eleve }}</a></td>
+                <td><a href="{{ path('compte_rendu_entreprise') }}">{{ compte_rendu.entreprise }}</a></td>                
                 <td>{{ compte_rendu.dateDebut }}</td>
                 <td>{{ compte_rendu.dateFin }}</td>
                 <td>{{ compte_rendu.theme }}</td>
