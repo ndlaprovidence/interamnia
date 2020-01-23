@@ -54,6 +54,18 @@ class CompteRendu
      */
     private $entreprise;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Eleve")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $eleve;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Prof")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $prof;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -139,6 +151,30 @@ class CompteRendu
     public function setEntreprise(?entreprise $entreprise): self
     {
         $this->entreprise = $entreprise;
+
+        return $this;
+    }
+
+    public function getEleve(): ?Eleve
+    {
+        return $this->eleve;
+    }
+
+    public function setEleve(?Eleve $eleve): self
+    {
+        $this->eleve = $eleve;
+
+        return $this;
+    }
+
+    public function getProf(): ?Prof
+    {
+        return $this->prof;
+    }
+
+    public function setProf(?Prof $prof): self
+    {
+        $this->prof = $prof;
 
         return $this;
     }

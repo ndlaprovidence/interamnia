@@ -6,6 +6,25 @@
 
     {{ include('entreprise/search.html.twig') }}
 
+    {# <div class="container">
+        <h2>Entreprises</h2>
+        <div class="row flex">
+            {% for entreprise in entreprises %}
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{{ path('entreprise_show') }}">{{ entreprise.nom }}</a>
+                            </h5>
+                            <p class="card-text">{{ entreprise.ville }} ({{ entreprise.rue }})</p>
+                            <div class="text-primary" style="font-weight: bold;font-size: 2rem;">{{ entreprise.activite }}</div> 
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div> #}
+
     <h1>Entreprise</h1>
 
     <table class="table">
@@ -13,8 +32,10 @@
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
-                <th>Code postal</th>
+                <th>Région</th>
+                <th>Département</th>
                 <th>Ville</th>
+                <th>Code postal</th>
                 <th>Rue</th>
                 <th>Téléphone</th>
                 <th>E-mail</th>
@@ -27,8 +48,10 @@
             <tr>
                 <td>{{ entreprise.id }}</td>
                 <td>{{ entreprise.nom }}</td>
-                <td>{{ entreprise.codePostal }}</td>
+                <td>{{ entreprise.region }}</td>
+                <td>{{ entreprise.departement }}</td>
                 <td>{{ entreprise.ville }}</td>
+                <td>{{ entreprise.codePostal }}</td>
                 <td>{{ entreprise.rue }}</td>
                 <td>{{ entreprise.telephone }}</td>
                 <td>{{ entreprise.email }}</td>

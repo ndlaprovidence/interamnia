@@ -14,8 +14,9 @@ class EntrepriseType extends AbstractType
         $builder
             ->add('nom')
             ->add('region')
-            ->add('code_postal')
+            ->add('departement')
             ->add('ville')
+            ->add('code_postal')
             ->add('rue')
             ->add('telephone')
             ->add('email')

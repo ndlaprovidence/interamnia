@@ -27,14 +27,19 @@ class Entreprise
     private $region;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $code_postal;
+    private $departement;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $ville;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $code_postal;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -85,14 +90,14 @@ class Entreprise
         return $this;
     }
 
-    public function getCodePostal(): ?string
+    public function getDepartement(): ?string
     {
-        return $this->code_postal;
+        return $this->departement;
     }
 
-    public function setCodePostal(?string $code_postal): self
+    public function setDepartement(string $departement): self
     {
-        $this->code_postal = $code_postal;
+        $this->departement = $departement;
 
         return $this;
     }
@@ -105,6 +110,18 @@ class Entreprise
     public function setVille(string $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getCodePostal(): ?string
+    {
+        return $this->code_postal;
+    }
+
+    public function setCodePostal(?string $code_postal): self
+    {
+        $this->code_postal = $code_postal;
 
         return $this;
     }

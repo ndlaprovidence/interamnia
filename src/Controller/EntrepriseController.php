@@ -20,18 +20,23 @@ class EntrepriseController extends AbstractController
 {
     /**
      * @Route("/", name="entreprise_index", methods={"GET"})
+     * @return Response
      */
-    public function index(Request $request, EntrepriseRepository $entrepriseRepository): Response
+    public function index(EntrepriseRepository $entrepriseRepository, Request $request): Response
     {
         $search = new RechercheEntreprise();
         $form = $this->createForm(RechercheEntrepriseType::class, $search);
         $form->handleRequest($request);
 
-        $entreprises = $entrepriseRepository->findAllVisibleQuery($search);
-
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entreprises = $entrepriseRepository->findAllVisibleQuery($search);
+        }
+        else {
+            $entreprises = $entrepriseRepository->findAll();
+        }
         return $this->render('entreprise/index.html.twig', [
-            'formSearch' => $form->createView(),
-            'entreprises' => $entreprises
+            'entreprises' => $entreprises,
+            'formSearch' => $form->createView()
         ]);
     }
 

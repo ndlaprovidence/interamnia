@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Entreprise;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\RechercheEntreprise;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Entreprise|null find($id, $lockMode = null, $lockVersion = null)
@@ -22,29 +23,30 @@ class EntrepriseRepository extends ServiceEntityRepository
     /**
      * @return Query
      */
-    public function findAllVisibleQuery(Entreprise $search): Query
+    public function findAllVisibleQuery(RechercheEntreprise $search)
     {
-        $query = $this->findVisibleQuery();
+        $query = $this->createQueryBuilder('e');
         
         if ($search->getNomEntreprise()) {
             $query = $query
-                ->where('e.nom = :nomEntreprise')
-                ->setParameter('nomEntreprise', $search->getNomEntreprise());
-        }
+                ->andWhere('e.nom = :nomEntreprise')
+                ->setParameter('nomEntreprise', $search->getNomEntreprise());                
+            }
 
         if ($search->getRegionEntreprise()) {
             $query = $query
-                ->where('e.region = :regionEntreprise')
+                ->andWhere('e.region = :regionEntreprise')
                 ->setParameter('regionEntreprise', $search->getRegionEntreprise());
         }
 
         if ($search->getVilleEntreprise()) {
             $query = $query
-                ->where('e.ville = :villeEntreprise')
+                ->andWhere('e.ville = :villeEntreprise')
                 ->setParameter('villeEntreprise', $search->getVilleEntreprise());
         }
         
-        return $query->getQuery();
+        // dump($query->getQuery());
+        return $query->getQuery()->getResult();
     }
 
     // /**
