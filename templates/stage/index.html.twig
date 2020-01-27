@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stage index{% endblock %}
+
+{% block body %}
+
+    {{ include('stage/search.html.twig') }}
+
+    <h1>Stages</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Thème du stage</th>
+                <th>Commentaire</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stages in stages %}
+            <tr>
+                <td>{{ stages.id }}</td>
+                <td>{{ stages.dateDebut|date('d-m-Y') }}</td>
+                <td>{{ stages.dateFin|date('d-m-Y') }}</td>
+                <td>{{ stages.theme }}</td>
+                <td>{{ stages.commentaire }}</td>
+                <td>
+                    <a href="{{ path('stage_show', {'id': stages.id}) }}">Afficher</a>
+                    <a href="{{ path('stage_edit', {'id': stages.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucune donnée trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('stage_new') }}">Créer</a>
+{% endblock %}

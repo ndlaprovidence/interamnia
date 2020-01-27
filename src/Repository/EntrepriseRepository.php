@@ -45,8 +45,24 @@ class EntrepriseRepository extends ServiceEntityRepository
                 ->setParameter('villeEntreprise', $search->getVilleEntreprise());
         }
         
-        // dump($query->getQuery());
         return $query->getQuery()->getResult();
+    }
+
+    /**
+     * @return Query
+     */
+    public function findDataOfCompany()
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery( // Comment sélectionner les élèves depuis l'entité entreprise ?
+            'SELECT c.user
+            FROM App\Entity\Stage c
+            INNER JOIN c.entreprise e
+            WHERE c.entreprise = :entreprise'
+        );
+
+        return $query->getResult();
     }
 
     // /**

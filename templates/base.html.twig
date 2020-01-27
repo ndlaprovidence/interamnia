@@ -31,7 +31,7 @@
                             <a class="nav-link" href="{{ path('entreprise_index') }}">Entreprise</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('compte_rendu_index') }}">Stage</a>
+                            <a class="nav-link" href="{{ path('stage_index') }}">Stage</a>
                         </li>
                     {% endif %}
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
@@ -39,7 +39,13 @@
                             <a class="nav-link" href="{{ path('user_index') }}">{{ 'User'|trans }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('eleve_index') }}">Élèves</a>
+                            <a class="nav-link" href="{{ path('activite_entreprise_index') }}">Activitées</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('b_t_s_index') }}">BTS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('contact_index') }}">Contact</a>
                         </li>
                     {% endif %}
                 </ul>

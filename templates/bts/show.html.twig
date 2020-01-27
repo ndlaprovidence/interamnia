@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BTS{% endblock %}
+
+{% block body %}
+    <h1>BTS</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ b_t.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ b_t.nom }}</td>
+            </tr>
+            <tr>
+                <th>Spécialisation</th>
+                <td>{{ b_t.specialisation }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('b_t_s_index') }}">back to list</a>
+
+    <a href="{{ path('b_t_s_edit', {'id': b_t.id}) }}">edit</a>
+
+    {{ include('bts/_delete_form.html.twig') }}
+{% endblock %}

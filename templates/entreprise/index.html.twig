@@ -60,6 +60,7 @@
                     <a href="{{ path('entreprise_show', {'id': entreprise.id}) }}">Afficher</a>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <a href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">Modifier</a>
+                        <a href="{{ path('entreprise_liste_stagiaire', {'id': entreprise.id}) }}">Consulter la liste des stagiaires</a>
                     {% endif %}
                 </td>
             </tr>

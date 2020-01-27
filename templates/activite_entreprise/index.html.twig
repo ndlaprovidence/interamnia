@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ActiviteEntreprise index{% endblock %}
+
+{% block body %}
+    <h1>ActiviteEntreprise index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Activite</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for activite_entreprise in activite_entreprises %}
+            <tr>
+                <td>{{ activite_entreprise.id }}</td>
+                <td>{{ activite_entreprise.activite }}</td>
+                <td>
+                    <a href="{{ path('activite_entreprise_show', {'id': activite_entreprise.id}) }}">show</a>
+                    <a href="{{ path('activite_entreprise_edit', {'id': activite_entreprise.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('activite_entreprise_new') }}">Create new</a>
+{% endblock %}

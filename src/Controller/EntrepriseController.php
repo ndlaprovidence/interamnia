@@ -60,6 +60,18 @@ class EntrepriseController extends AbstractController
     }
 
     /**
+     * @Route("/{id}", name="entreprise_liste_stagiaire", methods={"GET"})
+     */
+    public function listeStagiaire(EntrepriseRepository $entrepriseRepository): Response
+    {
+        $liste = $entrepriseRepository->findDataOfCompany();
+
+        return $this->render('entreprise/show.html.twig', [
+            'liste' => $liste,
+        ]);
+    }
+
+    /**
      * @Route("/{id}", name="entreprise_show", methods={"GET"})
      */
     public function show(Entreprise $entreprise): Response
