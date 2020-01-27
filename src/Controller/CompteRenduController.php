@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\RechercheStage;
 use App\Entity\CompteRendu;
 use App\Form\CompteRenduType;
+use App\Form\RechercheStageType;
 use App\Repository\CompteRenduRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,10 +20,17 @@ class CompteRenduController extends AbstractController
     /**
      * @Route("/", name="compte_rendu_index", methods={"GET"})
      */
-    public function index(CompteRenduRepository $compteRenduRepository): Response
+    public function index(CompteRenduRepository $compteRenduRepository, Request $request): Response
     {
+        $search = new RechercheStage();
+        $form = $this->createForm(RechercheStageType::class, $search);
+        $form->handleRequest($request);
+
+        $stages = $compteRenduRepository->findAllVisibleQuery($search);
+
         return $this->render('compte_rendu/index.html.twig', [
-            'compte_rendus' => $compteRenduRepository->findAll(),
+            'stages' => $stages,
+            'formSearch' => $form->createView(),
         ]);
     }
 
@@ -45,6 +54,38 @@ class CompteRenduController extends AbstractController
         return $this->render('compte_rendu/new.html.twig', [
             'compte_rendu' => $compteRendu,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/eleve", name="compte_rendu_eleve")
+     */
+    public function showEleve()
+    {
+        $eleve = $this->getDoctrine()
+            ->getRepository(CompteRendu::class)
+            ->findDataOfStudent();
+
+        $entreprises = $eleve->getEntreprise();
+
+        return $this->render('compte_rendu/eleve.html.twig', [
+            
+        ]);
+    }
+
+    /**
+     * @Route("/entreprise", name="compte_rendu_entreprise")
+     */
+    public function showEntreprise()
+    {
+        $entreprise = $this->getDoctrine()
+            ->getRepository(CompteRendu::class)
+            ->findDataOfCompany();
+
+        $eleves = $entreprise-getEleve();
+
+        return $this->render('compte_rendu/entreprise.html.twig', [
+            'entreprise' => $entreprise,
         ]);
     }
 
@@ -90,33 +131,5 @@ class CompteRenduController extends AbstractController
         }
 
         return $this->redirectToRoute('compte_rendu_index');
-    }
-
-    /**
-     * @Route("/eleve", name="compte_rendu_eleve", methods={"GET"})
-     */
-    public function eleve()
-    {
-        $eleve = $compterenduRepository->findDataEleve();
-
-        return $this->render('compte_rendu/eleve.html.twig', [
-            
-        ]);
-    }
-
-    /**
-     * @Route("/entreprise", name="compte_rendu_entreprise", methods={"GET"})
-     */
-    public function entreprise()
-    {
-        $entreprise = $this->getDoctrine()
-            ->getRepository(CompteRendu::class)
-            ->findDataOfCompany();
-
-        $eleves = $entreprise-getEleve();
-
-        return $this->render('compte_rendu/entreprise.html.twig', [
-            
-        ]);
     }
 }

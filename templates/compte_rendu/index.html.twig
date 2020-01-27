@@ -3,6 +3,9 @@
 {% block title %}CompteRendu index{% endblock %}
 
 {% block body %}
+
+    {{ include('compte_rendu/search.html.twig') }}
+
     <h1>Compte-rendu du stage</h1>
 
     <table class="table">
@@ -19,18 +22,18 @@
             </tr>
         </thead>
         <tbody>
-        {% for compte_rendu in compte_rendus %}
+        {% for stages in stages %}
             <tr>
-                <td>{{ compte_rendu.id }}</td>
-                <td><a href="{{ path('compte_rendu_eleve') }}">{{ compte_rendu.eleve }}</a></td>
-                <td><a href="{{ path('compte_rendu_entreprise') }}">{{ compte_rendu.entreprise }}</a></td>                
-                <td>{{ compte_rendu.dateDebut }}</td>
-                <td>{{ compte_rendu.dateFin }}</td>
-                <td>{{ compte_rendu.theme }}</td>
-                <td>{{ compte_rendu.commentaire }}</td>
+                <td>{{ stages.id }}</td>
+                <td><a href="{{ path('compte_rendu_eleve') }}">{{ stages.eleve }}</a></td>
+                <td><a href="{{ path('compte_rendu_entreprise') }}">{{ stages.entreprise }}</a></td>                
+                <td>{{ stages.dateDebut }}</td>
+                <td>{{ stages.dateFin }}</td>
+                <td>{{ stages.theme }}</td>
+                <td>{{ stages.commentaire }}</td>
                 <td>
-                    <a href="{{ path('compte_rendu_show', {'id': compte_rendu.id}) }}">Afficher</a>
-                    <a href="{{ path('compte_rendu_edit', {'id': compte_rendu.id}) }}">Modifier</a>
+                    <a href="{{ path('compte_rendu_show', {'id': stages.id}) }}">Afficher</a>
+                    <a href="{{ path('compte_rendu_edit', {'id': stages.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}

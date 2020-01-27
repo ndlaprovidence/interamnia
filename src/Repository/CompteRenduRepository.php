@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\CompteRendu;
+use App\Entity\RechercheStage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -19,18 +20,58 @@ class CompteRenduRepository extends ServiceEntityRepository
         parent::__construct($registry, CompteRendu::class);
     }
 
-    public function findDataOfStudent()
+    /**
+     * @return Query
+     */
+    public function findAllVisibleQuery(RechercheStage $search)
     {
+        $query = $this->createQueryBuilder('c');
         
+        if ($search->getDateStage()) {
+            $query = $query
+                ->andWhere('c.date_debut = :dateStage')
+                ->setParameter('dateStage', $search->getDateStage());                
+            }
+
+        if ($search->getEleveStage()) {
+            $query = $query
+                ->andWhere('c.eleve = :eleveStage')
+                ->setParameter('eleveStage', $search->getEleveStage());
+        }
+
+        if ($search->getEntrepriseStage()) {
+            $query = $query
+                ->andWhere('c.entreprise = :entrepriseStage')
+                ->setParameter('entrepriseStage', $search->getEntrepriseStage());
+        }
+        
+        return $query->getQuery()->getResult();
     }
 
+    /**
+     * @return Query
+     */
+    public function findDataOfStudent()
+    {
+        $query = $entityManager->createQuery(
+            
+        );
+
+        return $query->getOneOrNullResult();
+    }
+
+    /**
+     * @return Query
+     */
     public function findDataOfCompany()
     {
+        $entityManager = $this->getEntityManager();
+
         $query = $entityManager->createQuery(
             'SELECT c.eleve
             FROM App\Entity\CompteRendu c
             INNER JOIN c.entreprise e
-            WHERE c.entreprise :entreprise'
+            WHERE c.entreprise = :entreprise'
         );
 
         return $query->getOneOrNullResult();

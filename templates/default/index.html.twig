@@ -5,46 +5,23 @@
 {% block body %}
     <div class="example-wrapper">
 
-        <div class="corps">
-            <div class="main-content">
-                <div class="default-jumbotron">
-                    <h3>Interamnia</h3>
-                    <hr class="my-8">
-                    <h3>{{'Features'|trans}}</h3>
-                    <ul>
-                        <li>
-                            {{''|trans}}
-                        </li>
-                        <li>
-                            {{''|trans}}
-                        </li>
-                        <li>
-                            ...
-                        </li>
-                    </ul>
+        <div class="jumbotron">
+            <h3>Interamnia</h3>
+            <hr class="my-4">
+            <h3>{{'Features'|trans}}</h3>
+            <ul>
+                <li>
+                    {{''|trans}}
+                </li>
+                <li>
+                    {{''|trans}}
+                </li>
+                <li>
+                    ...
+                </li>
+            </ul>
 
-                    <a class="btn btn-primary float-md-right" href="{{ path('app_login') }}" role="button">{{ 'Let\'s start now'|trans}} <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
-
-                <div class="default-jumbotron">
-                    <h3>Interamnia</h3>
-                    <hr class="my-8">
-                    <h3>{{'Features'|trans}}</h3>
-                    <ul>
-                        <li>
-                            {{''|trans}}
-                        </li>
-                        <li>
-                            {{''|trans}}
-                        </li>
-                        <li>
-                            ...
-                        </li>
-                    </ul>
-
-                    <a class="btn btn-primary float-md-right" href="{{ path('app_login') }}" role="button">{{ 'Let\'s start now'|trans}} <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
+            <a class="btn btn-primary float-md-right" href="{{ path('app_login') }}" role="button">{{ 'Let\'s start now'|trans}} <i class="fas fa-arrow-circle-right"></i></a>
         </div>
 
     </div>
