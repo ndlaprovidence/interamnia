@@ -51,16 +51,16 @@ class EntrepriseRepository extends ServiceEntityRepository
     /**
      * @return Query
      */
-    public function findDataOfCompany()
+    public function findDataOfCompany($entreprise)
     {
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery( // Comment sélectionner les élèves depuis l'entité entreprise ?
-            'SELECT c.user
+            'SELECT IDENTITY (c.user)
             FROM App\Entity\Stage c
             INNER JOIN c.entreprise e
             WHERE c.entreprise = :entreprise'
-        );
+        )->setParameter('entreprise', $entreprise);
 
         return $query->getResult();
     }

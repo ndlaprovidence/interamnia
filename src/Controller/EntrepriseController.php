@@ -2,16 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Stage;
 use App\Entity\Entreprise;
-use App\Entity\RechercheEntreprise;
 use App\Form\EntrepriseType;
+use App\Entity\RechercheEntreprise;
 use App\Form\RechercheEntrepriseType;
 use App\Repository\EntrepriseRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/entreprise")
@@ -62,11 +63,13 @@ class EntrepriseController extends AbstractController
     /**
      * @Route("/{id}", name="entreprise_liste_stagiaire", methods={"GET"})
      */
-    public function listeStagiaire(EntrepriseRepository $entrepriseRepository): Response
+    public function listeStagiaire($id): Response
     {
-        $liste = $entrepriseRepository->findDataOfCompany();
+        $liste = $this->getDoctrine()
+            ->getRepository(Entreprise::class)
+            ->findDataOfCompany($id);
 
-        return $this->render('entreprise/show.html.twig', [
+        return $this->render('entreprise/stagiaire.html.twig', [
             'liste' => $liste,
         ]);
     }
