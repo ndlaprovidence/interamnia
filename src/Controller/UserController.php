@@ -53,6 +53,20 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/{id}", name="user_stage", methods={"GET"})
+     */
+    public function userStage($id): Response
+    {
+        $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findDataOfCompany($id);
+
+        return $this->render('user/stagiaire.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    /**
      * @Route("/{id}", name="user_show", methods={"GET"})
      */
     public function show(User $user): Response

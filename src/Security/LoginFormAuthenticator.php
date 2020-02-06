@@ -21,7 +21,7 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
-    use TargetPathTrait;
+    use TargetPathTrait;  
 
     private $entityManager;
     private $urlGenerator;
@@ -45,13 +45,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function getCredentials(Request $request)
     {
         $credentials = [
-            'email' => $request->request->get('email'),
+            'login' => $request->request->get('login'),
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
-            $credentials['email']
+            $credentials['login']
         );
 
         return $credentials;
@@ -59,24 +59,103 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $token = new CsrfToken('authenticate', $credentials['csrf_token']);
-        if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException();
+        global $login, $givenname, $sn, $role, $bts;
+
+        $ldaprdn  = 'btssio';
+        $ldappass = 'sisr';   
+        $credentials_login = $credentials['login'];
+
+        $ldapconn = ldap_connect("172.16.122.250") or die ("Impossible de se connecter au serveur LDAP.");
+
+        if ($ldapconn) {
+
+            $ldapbind = ldap_bind($ldapconn, $ldaprdn, $ldappass);
+        
+            if ($ldapbind) {
+                // echo "Connexion LDAP réussie !";
+                $token = new CsrfToken('authenticate', $credentials['csrf_token']);
+                if (!$this->csrfTokenManager->isTokenValid($token)) {
+                    throw new InvalidCsrfTokenException();
+                }
+
+                $user = $this->entityManager->getRepository(User::class)->findOneBy(['login' => $credentials_login]);
+                //dump($user); exit;
+                $password = $credentials['password'];
+                
+                if (!$user) { 
+
+                    $user = new User();
+
+                    $user->setLogin($credentials_login);
+
+                    $sr = ldap_search($ldapconn, "ou=bts, ou=Eleves, ou=utilisateurs, dc=ndlp, dc=fr", "sAMAccountName=$credentials_login");
+                    $data = ldap_get_entries($ldapconn, $sr);
+                    // dump($data);
+
+                    for ($i=0; $i<$data["count"]; $i++) {
+                        $login = $data[$i]["samaccountname"][0];
+                        $givenname = $data[$i]["givenname"][0];
+                        $sn = $data[$i]["sn"][0];
+                        $mail = $data[$i]["mail"][0];
+                        $role = ["ROLE_USER"];
+
+                        if ($data[$i]["scriptpath"][0] == 'sio1.cmd' || $data[$i]["scriptpath"][0] == 'sio2.cmd') {
+                            $bts = '1';
+                        } elseif ($data[$i]["scriptpath"][0] == 'sam1.cmd' || $data[$i]["scriptpath"][0] == 'sam2.cmd') {
+                            $bts = '2';
+                        } elseif ($data[$i]["scriptpath"][0] == 'ag1.cmd' || $data[$i]["scriptpath"][0] == 'ag2.cmd') {
+                            $bts = '3';
+                        } elseif ($data[$i]["scriptpath"][0] == 'gpme1.cmd' || $data[$i]["scriptpath"][0] == 'gpme2.cmd') {
+                            $bts = '4';
+                        }
+                    }
+
+                    // Créer des variables pour chaque donnée
+                    if ($user->getLogin() == $login) {
+                        // $entityManager = $this->getDoctrine()->getManager();
+                        $entityManager = $this->entityManager;
+
+                        // $user->setBTS($bts);
+                        $user->setNom($sn);
+                        $user->setPrenom($givenname);
+                        $user->setEmail($mail);
+                        $user->setLogin($login);
+                        $user->setRoles($role);
+                        $user->setPassword($this->passwordEncoder->encodePassword(
+                            $user,
+                            $password
+                        ));
+
+                        $entityManager->persist($user);
+
+                        $entityManager->flush();
+                        
+                        // $query = $this->entityManager->createQuery("INSERT INTO User (bts_id, nom, prenom, roles) VALUES ($bts, $sn, $givenname, $role)");
+                        // return $query->getResult();
+                        // Ajouter cette utilisateur dans la BD locale (Utilisation du SQL ? -> SQL Update)
+                        // https://symfony.com/doc/current/reference/forms/types/hidden.html
+                    } else {
+                        //fail authentication with a custom error
+                        throw new CustomUserMessageAuthenticationException('Nom d\'utilisateur introuvable !');
+                    }
+                }
+                
+                // $data = ldap_get_entries($ldapconn, $sr);
+                
+                // echo '<h1>Dump all data</h1><pre>';
+                // print_r($data);   
+                // echo '</pre>';
+            } else {
+                // echo "Connexion LDAP échouée !";
+            }
         }
-
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
-
-        if (!$user) {
-            // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
-        }
-
         return $user;
     }
 
     public function checkCredentials($credentials, UserInterface $user)
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        // Ajouter le mot de passe dans la BD
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)

@@ -3,25 +3,22 @@
 {% block title %}Stagiaire{% endblock %}
 
 {% block body %}
-    <h1>Entreprise</h1>
+    <h1>Stage</h1>
 
     <table class="table">
         <tbody>
-            {% for liste in liste %}
-                {{ dump(liste) }}
-                <tr>
-                    <th>Id</th>
-                    <td>{{ liste.id }}</td>
-                </tr>
-                <tr>
-                    <th>Nom</th>
-                    <td>{{ liste.user }}</td>
-                </tr>
-            {% endfor %}
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.nom }}</td>
+            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('entreprise_index') }}">Retour</a>
+    <a href="{{ path('user_index') }}">Retour</a>
 
     {# {% if is_granted('ROLE_SUPER_ADMIN') %}
         <a href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">Modifier</a>

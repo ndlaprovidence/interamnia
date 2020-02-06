@@ -20,6 +20,27 @@ class UserRepository extends ServiceEntityRepository
     }
 
     // /**
+    //  * @return Query
+    //  */
+    // public function findDataOfStudent($entreprise)
+    // {
+    //     $em = $this->getEntityManager();
+
+    //     $query = $em->createQuery( // Comment sélectionner les élèves depuis l'entité entreprise ?
+    //         'SELECT IDENTITY (c.user)
+    //         FROM App\Entity\Stage c
+    //         INNER JOIN c.entreprise e
+    //         WHERE c.entreprise = :entreprise'
+    //     )->setParameter('entreprise', $entreprise);
+
+    //     return $query->getResult();
+    // }
+
+    // SELECT e.id, e.nom, e.region, e.ville, s.date_debut, s.date_fin, s.theme 
+    // FROM tbl_entreprise e JOIN tbl_stage s ON e.id = s.entreprise_id JOIN tbl_user u ON s.user_id = u.id 
+    // WHERE e.id = s.entreprise_id AND s.user_id = u.id 
+
+    // /**
     //  * @return User[] Returns an array of User objects
     //  */
     /*

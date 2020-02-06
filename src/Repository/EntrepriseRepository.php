@@ -53,17 +53,16 @@ class EntrepriseRepository extends ServiceEntityRepository
      */
     public function findDataOfCompany($entreprise)
     {
-        $entityManager = $this->getEntityManager();
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT u.id, u.nom, u.prenom FROM App\Entity\User u JOIN App\Entity\Stage s JOIN App\Entity\Entreprise e WHERE u.id = :s.id AND s.entreprise = :e.id')->setParameter('entreprise', $entreprise);
+        $users = $query->getResult();
 
-        $query = $entityManager->createQuery( // Comment sélectionner les élèves depuis l'entité entreprise ?
-            'SELECT IDENTITY (c.user)
-            FROM App\Entity\Stage c
-            INNER JOIN c.entreprise e
-            WHERE c.entreprise = :entreprise'
-        )->setParameter('entreprise', $entreprise);
-
-        return $query->getResult();
+        return $users;
     }
+
+    // SELECT u.id, u.nom, u.prenom 
+    // FROM tbl_user u JOIN tbl_stage s ON u.id = s.user_id JOIN tbl_entreprise e ON s.entreprise_id = e.id 
+    // WHERE u.id = s.user_id AND s.entreprise_id = e.id 
 
     // /**
     //  * @return Entreprise[] Returns an array of Entreprise objects

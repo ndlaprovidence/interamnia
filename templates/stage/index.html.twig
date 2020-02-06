@@ -12,6 +12,8 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Nom</th>
+                <th>Entreprise</th>
                 <th>Date de début</th>
                 <th>Date de fin</th>
                 <th>Thème du stage</th>
@@ -23,6 +25,8 @@
         {% for stages in stages %}
             <tr>
                 <td>{{ stages.id }}</td>
+                <td>{{ stages.user }}</td>
+                <td>{{ stages.entreprise }}</td>
                 <td>{{ stages.dateDebut|date('d-m-Y') }}</td>
                 <td>{{ stages.dateFin|date('d-m-Y') }}</td>
                 <td>{{ stages.theme }}</td>

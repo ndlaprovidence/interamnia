@@ -36,6 +36,11 @@ class User implements UserInterface
     private $email;
 
     /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $login;
+
+    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -50,6 +55,11 @@ class User implements UserInterface
      * @ORM\ManyToOne(targetEntity="App\Entity\BTS")
      */
     private $BTS;
+
+    
+    public function __construct() {
+        $this->nom = "Utilisateur inconnu";
+    }
 
     public function getId(): ?int
     {
@@ -88,6 +98,18 @@ class User implements UserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getLogin(): ?string
+    {
+        return $this->login;
+    }
+
+    public function setLogin(string $login): self
+    {
+        $this->login = $login;
 
         return $this;
     }
