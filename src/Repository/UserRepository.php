@@ -19,22 +19,31 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    // /**
-    //  * @return Query
-    //  */
-    // public function findDataOfStudent($entreprise)
-    // {
-    //     $em = $this->getEntityManager();
-
-    //     $query = $em->createQuery( // Comment sélectionner les élèves depuis l'entité entreprise ?
-    //         'SELECT IDENTITY (c.user)
-    //         FROM App\Entity\Stage c
-    //         INNER JOIN c.entreprise e
-    //         WHERE c.entreprise = :entreprise'
-    //     )->setParameter('entreprise', $entreprise);
-
-    //     return $query->getResult();
-    // }
+    /**
+     * @return Query
+     */
+    public function findDataOfUser($id)
+    {
+            $query = $this->createQueryBuilder('u')
+            ->select('e.id, e.nom, e.region, e.ville, s.date_debut, s.date_fin, s.theme')
+            ->join(
+                'App\Entity\Stage',
+                's',
+                'WITH',
+                'u.id = s.user'
+            )
+            ->join(
+                'App\Entity\Entreprise',
+                'e',
+                'WITH',
+                'e.id = s.entreprise'
+            )
+            ->andWhere('u.id = :u_id')
+            ->setParameter('u_id', $id);
+            // ->setMaxResults(10)
+            
+            return $query->getQuery()->getResult();
+    }
 
     // SELECT e.id, e.nom, e.region, e.ville, s.date_debut, s.date_fin, s.theme 
     // FROM tbl_entreprise e JOIN tbl_stage s ON e.id = s.entreprise_id JOIN tbl_user u ON s.user_id = u.id 

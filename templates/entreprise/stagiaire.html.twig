@@ -3,19 +3,20 @@
 {% block title %}Stagiaire{% endblock %}
 
 {% block body %}
-    <h1>Entreprise</h1>
+    <h1>Liste des stagiaires</h1>
 
     <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+            </tr>
+        </thead>
         <tbody>
-            {% for liste in liste %}
-                {{ dump(liste) }}
+            {% for stagiaire in stagiaires %}
                 <tr>
-                    <th>Id</th>
-                    <td>{{ liste.id }}</td>
-                </tr>
-                <tr>
-                    <th>Nom</th>
-                    <td>{{ liste.user }}</td>
+                    <td>{{ stagiaire.nom }}</td>
+                    <td>{{ stagiaire.prenom }}</td>
                 </tr>
             {% endfor %}
         </tbody>

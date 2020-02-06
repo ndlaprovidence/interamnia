@@ -17,7 +17,7 @@ class RechercheStageType extends AbstractType
                 'required' => false,
                 'label' => false,
                 'attr' => [
-                    'placeholder' => "Date du stage"
+                    'placeholder' => "Année du stage"
                 ]
             ])
             ->add('eleveStage', TextType::class, [

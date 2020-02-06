@@ -65,12 +65,12 @@ class EntrepriseController extends AbstractController
      */
     public function listeStagiaire($id): Response
     {
-        $liste = $this->getDoctrine()
+        $stagiaires = $this->getDoctrine()
             ->getRepository(Entreprise::class)
             ->findDataOfCompany($id);
 
         return $this->render('entreprise/stagiaire.html.twig', [
-            'liste' => $liste,
+            'stagiaires' => $stagiaires,
         ]);
     }
 

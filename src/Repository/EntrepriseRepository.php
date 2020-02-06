@@ -26,12 +26,12 @@ class EntrepriseRepository extends ServiceEntityRepository
     public function findAllVisibleQuery(RechercheEntreprise $search)
     {
         $query = $this->createQueryBuilder('e');
-        
+
         if ($search->getNomEntreprise()) {
             $query = $query
                 ->andWhere('e.nom = :nomEntreprise')
-                ->setParameter('nomEntreprise', $search->getNomEntreprise());                
-            }
+                ->setParameter('nomEntreprise', $search->getNomEntreprise());
+        }
 
         if ($search->getRegionEntreprise()) {
             $query = $query
@@ -44,20 +44,34 @@ class EntrepriseRepository extends ServiceEntityRepository
                 ->andWhere('e.ville = :villeEntreprise')
                 ->setParameter('villeEntreprise', $search->getVilleEntreprise());
         }
-        
+
         return $query->getQuery()->getResult();
     }
 
     /**
      * @return Query
      */
-    public function findDataOfCompany($entreprise)
+    public function findDataOfCompany($id)
     {
-        $em = $this->getEntityManager();
-        $query = $em->createQuery('SELECT u.id, u.nom, u.prenom FROM App\Entity\User u JOIN App\Entity\Stage s JOIN App\Entity\Entreprise e WHERE u.id = :s.id AND s.entreprise = :e.id')->setParameter('entreprise', $entreprise);
-        $users = $query->getResult();
-
-        return $users;
+            $query = $this->createQueryBuilder('e')
+            ->select('u.id, u.nom, u.prenom')
+            ->join(
+                'App\Entity\Stage',
+                's',
+                'WITH',
+                'e.id = s.entreprise'
+            )
+            ->join(
+                'App\Entity\User',
+                'u',
+                'WITH',
+                'u.id = s.user'
+            )
+            ->andWhere('e.id = :e_id')
+            ->setParameter('e_id', $id);
+            // ->setMaxResults(10)
+            
+            return $query->getQuery()->getResult();
     }
 
     // SELECT u.id, u.nom, u.prenom 

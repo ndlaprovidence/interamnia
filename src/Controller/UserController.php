@@ -53,16 +53,16 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_stage", methods={"GET"})
+     * @Route("/{id}", name="user_profil", methods={"GET"})
      */
-    public function userStage($id): Response
+    public function profilUtilisateur($id): Response
     {
-        $user = $this->getDoctrine()
+        $users = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findDataOfCompany($id);
+            ->findDataOfUser($id);
 
-        return $this->render('user/stagiaire.html.twig', [
-            'user' => $user,
+        return $this->render('user/profil.html.twig', [
+            'profils' => $users,
         ]);
     }
 

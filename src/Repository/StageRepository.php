@@ -44,7 +44,7 @@ class StageRepository extends ServiceEntityRepository
                 ->andWhere('c.entreprise = :entrepriseStage')
                 ->setParameter('entrepriseStage', $search->getEntrepriseStage());
         }
-        
+
         return $query->getQuery()->getResult();
     }
 
