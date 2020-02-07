@@ -13,7 +13,7 @@ class RechercheEntreprise {
     /**
      * @var string|null
      */
-    private $regionEntreprise;
+    private $departementEntreprise;
 
     /**
      * @var string|null
@@ -41,18 +41,18 @@ class RechercheEntreprise {
     /**
      * @return string|null
      */
-    public function getRegionEntreprise(): ?string 
+    public function getDepartementEntreprise(): ?string 
     {
-        return $this->regionEntreprise;
+        return $this->departementEntreprise;
     }
 
     /**
-     * @param string|null $regionEntreprise
+     * @param string|null $departementEntreprise
      * @return RechercheEntreprise
      */
-    public function setRegionEntreprise(?string $regionEntreprise): RechercheEntreprise
+    public function setDepartementEntreprise(?string $departementEntreprise): RechercheEntreprise
     {
-        $this->regionEntreprise = $regionEntreprise;
+        $this->departementEntreprise = $departementEntreprise;
         return $this;
     }
 

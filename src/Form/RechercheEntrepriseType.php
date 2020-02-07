@@ -20,11 +20,11 @@ class RechercheEntrepriseType extends AbstractType
                     'placeholder' => "Nom de l'entreprise"
                 ]
             ])
-            ->add('regionEntreprise', TextType::class, [
+            ->add('departementEntreprise', TextType::class, [
                 'required' => false,
                 'label' => false,
                 'attr' => [
-                    'placeholder' => "Région de l'entreprise"
+                    'placeholder' => "Département de l'entreprise"
                 ]
             ])
             ->add('villeEntreprise', TextType::class, [

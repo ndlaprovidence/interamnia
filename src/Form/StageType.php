@@ -2,9 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\BTS;
 use App\Entity\Stage;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 
@@ -22,7 +25,10 @@ class StageType extends AbstractType
             ->add('theme')
             ->add('commentaire')
             ->add('user') // Choisir uniquement les élèves parmis les utilisateurs
-            ->add('user') // Choisir uniquement les profs parmis les utilisateurs
+            // ->add('user') // Choisir uniquement les profs parmis les utilisateurs
+            ->add('bts', EntityType::class, [
+                'class' => BTS::class,
+            ])
             ->add('entreprise')
         ;
     }

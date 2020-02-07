@@ -49,6 +49,12 @@ class Stage
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\BTS")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $bts;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -122,6 +128,18 @@ class Stage
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getBts(): ?BTS
+    {
+        return $this->bts;
+    }
+
+    public function setBts(?BTS $bts): self
+    {
+        $this->bts = $bts;
 
         return $this;
     }

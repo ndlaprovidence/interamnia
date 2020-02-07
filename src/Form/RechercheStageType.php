@@ -27,11 +27,11 @@ class RechercheStageType extends AbstractType
                     'placeholder' => "Élève ayant fait le stage"
                 ]
             ])
-            ->add('entrepriseStage', TextType::class, [
+            ->add('btsStage', TextType::class, [
                 'required' => false,
                 'label' => false,
                 'attr' => [
-                    'placeholder' => "Entreprise du stage"
+                    'placeholder' => "BTS de l'élève"
                 ]
             ])
         ;

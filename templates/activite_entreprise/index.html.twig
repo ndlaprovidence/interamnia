@@ -3,33 +3,31 @@
 {% block title %}ActiviteEntreprise index{% endblock %}
 
 {% block body %}
-    <h1>ActiviteEntreprise index</h1>
+    <h1>Activité d'une entreprise</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Activite</th>
+                <th>Activité</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for activite_entreprise in activite_entreprises %}
             <tr>
-                <td>{{ activite_entreprise.id }}</td>
                 <td>{{ activite_entreprise.activite }}</td>
                 <td>
-                    <a href="{{ path('activite_entreprise_show', {'id': activite_entreprise.id}) }}">show</a>
-                    <a href="{{ path('activite_entreprise_edit', {'id': activite_entreprise.id}) }}">edit</a>
+                    <a href="{{ path('activite_entreprise_show', {'id': activite_entreprise.id}) }}">Afficher</a>
+                    <a href="{{ path('activite_entreprise_edit', {'id': activite_entreprise.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Aucune données trouvées</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('activite_entreprise_new') }}">Create new</a>
+    <a href="{{ path('activite_entreprise_new') }}">Créer</a>
 {% endblock %}

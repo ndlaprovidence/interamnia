@@ -30,7 +30,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
                 <th>Région</th>
                 <th>Département</th>
@@ -46,7 +45,6 @@
         <tbody>
         {% for entreprise in entreprises %}
             <tr>
-                <td>{{ entreprise.id }}</td>
                 <td>{{ entreprise.nom }}</td>
                 <td>{{ entreprise.region }}</td>
                 <td>{{ entreprise.departement }}</td>
@@ -66,7 +64,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">Aucune donnée trouvée</td>
+                <td colspan="9">Aucune données trouvées</td>
             </tr>
         {% endfor %}
         </tbody>

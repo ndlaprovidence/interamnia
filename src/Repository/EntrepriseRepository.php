@@ -29,19 +29,19 @@ class EntrepriseRepository extends ServiceEntityRepository
 
         if ($search->getNomEntreprise()) {
             $query = $query
-                ->andWhere('e.nom = :nomEntreprise')
+                ->andWhere('e.nom LIKE :nomEntreprise')
                 ->setParameter('nomEntreprise', $search->getNomEntreprise());
         }
 
-        if ($search->getRegionEntreprise()) {
+        if ($search->getDepartementEntreprise()) {
             $query = $query
-                ->andWhere('e.region = :regionEntreprise')
-                ->setParameter('regionEntreprise', $search->getRegionEntreprise());
+                ->andWhere('e.departement LIKE :departementEntreprise')
+                ->setParameter('departementEntreprise', $search->getDepartementEntreprise());
         }
 
         if ($search->getVilleEntreprise()) {
             $query = $query
-                ->andWhere('e.ville = :villeEntreprise')
+                ->andWhere('e.ville LIKE :villeEntreprise')
                 ->setParameter('villeEntreprise', $search->getVilleEntreprise());
         }
 

@@ -50,12 +50,6 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\BTS")
-     */
-    private $BTS;
-
     
     public function __construct() {
         $this->nom = "Utilisateur inconnu";
@@ -173,18 +167,6 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    public function getBTS(): ?BTS
-    {
-        return $this->BTS;
-    }
-
-    public function setBTS(?BTS $BTS): self
-    {
-        $this->BTS = $BTS;
-
-        return $this;
     }
 
     public function __toString() {

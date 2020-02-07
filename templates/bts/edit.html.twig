@@ -3,11 +3,11 @@
 {% block title %}Edit BTS{% endblock %}
 
 {% block body %}
-    <h1>Edit BTS</h1>
+    <h1>Modifier le nom du BTS</h1>
 
-    {{ include('bts/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('bts/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    <a href="{{ path('b_t_s_index') }}">back to list</a>
+    <a href="{{ path('b_t_s_index') }}">Retour</a>
 
     {{ include('bts/_delete_form.html.twig') }}
 {% endblock %}

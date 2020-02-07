@@ -1,5 +1,8 @@
 <?php
 
+// Ajouter l'email s'il n'existe pas -> Utiliser try and catch pour utiliser l'erreur
+// Comparaison des mots de passe
+
 namespace App\Security;
 
 use App\Entity\User;
@@ -97,6 +100,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
                         $givenname = $data[$i]["givenname"][0];
                         $sn = $data[$i]["sn"][0];
                         $mail = $data[$i]["mail"][0];
+                        dump($mail); exit;
                         $role = ["ROLE_USER"];
 
                         if ($data[$i]["scriptpath"][0] == 'sio1.cmd' || $data[$i]["scriptpath"][0] == 'sio2.cmd') {

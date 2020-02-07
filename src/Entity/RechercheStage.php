@@ -18,7 +18,7 @@ class RechercheStage {
     /**
      * @var string|null
      */
-    private $entrepriseStage;
+    private $btsStage;
 
     /**
      * @return string|null
@@ -59,18 +59,18 @@ class RechercheStage {
     /**
      * @return string|null
      */
-    public function getEntrepriseStage(): ?string 
+    public function getBTSStage(): ?string 
     {
-        return $this->entrepriseStage;
+        return $this->btsStage;
     }
 
     /**
-     * @param string|null $entrepriseStage
+     * @param string|null $btsStage
      * @return RechercheStage
      */
-    public function setEntrepriseStage(?string $entrepriseStage): RechercheStage
+    public function setBTSStage(?string $btsStage): RechercheStage
     {
-        $this->entrepriseStage = $entrepriseStage;
+        $this->btsStage = $btsStage;
         return $this;
     }
 

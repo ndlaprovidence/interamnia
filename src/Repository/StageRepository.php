@@ -6,6 +6,7 @@ use App\Entity\Stage;
 use App\Entity\RechercheStage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use DoctrineExtensions\Query\Mysql;
 
 /**
  * @method Stage|null find($id, $lockMode = null, $lockVersion = null)
@@ -25,24 +26,29 @@ class StageRepository extends ServiceEntityRepository
      */
     public function findAllVisibleQuery(RechercheStage $search)
     {
-        $query = $this->createQueryBuilder('c');
+        $emConfig = $this->getEntityManager()->getConfiguration();
+        $emConfig->addCustomDatetimeFunction('YEAR', 'DoctrineExtensions\Query\Mysql\Year');
+        $emConfig->addCustomDatetimeFunction('MONTH', 'DoctrineExtensions\Query\Mysql\Month');
+        $emConfig->addCustomDatetimeFunction('DAY', 'DoctrineExtensions\Query\Mysql\Day');
+
+        $query = $this->createQueryBuilder('s');
         
         if ($search->getDateStage()) {
             $query = $query
-                ->andWhere('c.date_debut = :dateStage')
+                ->andWhere('YEAR(s.date_debut) = :dateStage')
                 ->setParameter('dateStage', $search->getDateStage());                
             }
 
         if ($search->getEleveStage()) {
             $query = $query
-                ->andWhere('c.eleve = :eleveStage')
+                ->andWhere('s.eleve LIKE :eleveStage')
                 ->setParameter('eleveStage', $search->getEleveStage());
         }
 
-        if ($search->getEntrepriseStage()) {
+        if ($search->getBTSStage()) {
             $query = $query
-                ->andWhere('c.entreprise = :entrepriseStage')
-                ->setParameter('entrepriseStage', $search->getEntrepriseStage());
+                ->andWhere('s.bts = :btsStage')
+                ->setParameter('btsStage', $search->getBTSStage());
         }
 
         return $query->getQuery()->getResult();

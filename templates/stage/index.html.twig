@@ -11,8 +11,8 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
+                <th>BTS</th>
                 <th>Entreprise</th>
                 <th>Date de début</th>
                 <th>Date de fin</th>
@@ -24,8 +24,8 @@
         <tbody>
         {% for stages in stages %}
             <tr>
-                <td>{{ stages.id }}</td>
                 <td>{{ stages.user }}</td>
+                <td>{{ stages.bts }}</td>
                 <td>{{ stages.entreprise }}</td>
                 <td>{{ stages.dateDebut|date('d-m-Y') }}</td>
                 <td>{{ stages.dateFin|date('d-m-Y') }}</td>
@@ -38,7 +38,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">Aucune donnée trouvée</td>
+                <td colspan="7">Aucune données trouvées</td>
             </tr>
         {% endfor %}
         </tbody>

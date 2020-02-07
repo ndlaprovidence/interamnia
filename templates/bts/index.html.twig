@@ -3,12 +3,11 @@
 {% block title %}BTS index{% endblock %}
 
 {% block body %}
-    <h1>BTS index</h1>
+    <h1>BTS</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
                 <th>Spécialisation</th>
                 <th>Actions</th>
@@ -17,21 +16,20 @@
         <tbody>
         {% for b_t in b_t_ss %}
             <tr>
-                <td>{{ b_t.id }}</td>
                 <td>{{ b_t.nom }}</td>
                 <td>{{ b_t.specialisation }}</td>
                 <td>
-                    <a href="{{ path('b_t_s_show', {'id': b_t.id}) }}">show</a>
-                    <a href="{{ path('b_t_s_edit', {'id': b_t.id}) }}">edit</a>
+                    <a href="{{ path('b_t_s_show', {'id': b_t.id}) }}">Afficher</a>
+                    <a href="{{ path('b_t_s_edit', {'id': b_t.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Aucune données trouvées</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('b_t_s_new') }}">Create new</a>
+    <a href="{{ path('b_t_s_new') }}">Créer</a>
 {% endblock %}

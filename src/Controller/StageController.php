@@ -1,5 +1,7 @@
 <?php
 
+// Ajouter le BTS, l'option et l'année dans la création du compte-rendu
+
 namespace App\Controller;
 
 use App\Entity\RechercheStage;

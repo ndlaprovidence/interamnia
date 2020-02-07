@@ -8,16 +8,12 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ stage.id }}</td>
-            </tr>
-            <tr>
                 <th>Date_debut</th>
-                <td>{{ stage.dateDebut }}</td>
+                <td>{{ stage.dateDebut|date('d-m-Y') }}</td>
             </tr>
             <tr>
                 <th>Date_fin</th>
-                <td>{{ stage.dateFin }}</td>
+                <td>{{ stage.dateFin|date('d-m-Y') }}</td>
             </tr>
             <tr>
                 <th>Theme</th>
