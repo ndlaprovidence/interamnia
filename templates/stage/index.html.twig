@@ -34,6 +34,9 @@
                 <td>
                     <a href="{{ path('stage_show', {'id': stages.id}) }}">Afficher</a>
                     <a href="{{ path('stage_edit', {'id': stages.id}) }}">Modifier</a>
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <a href="{{ path('stage_pdf') }}">Imprimer</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}

@@ -73,5 +73,4 @@ class RechercheEntreprise {
         $this->villeEntreprise = $villeEntreprise;
         return $this;
     }
-
 }

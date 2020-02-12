@@ -53,7 +53,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_profil", methods={"GET"})
+     * @Route("/{id}/profil", name="user_profil", methods={"GET"})
      */
     public function profilUtilisateur($id): Response
     {
@@ -67,7 +67,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_show", methods={"GET"})
+     * @Route("/{id}/show", name="user_show", methods={"GET"})
      */
     public function show(User $user): Response
     {
@@ -97,7 +97,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="user_delete", methods={"DELETE"})
      */
     public function delete(Request $request, User $user): Response
     {

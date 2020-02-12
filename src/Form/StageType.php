@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\BTS;
 use App\Entity\Stage;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

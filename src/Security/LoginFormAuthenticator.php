@@ -7,20 +7,20 @@ namespace App\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
@@ -99,19 +99,32 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
                         $login = $data[$i]["samaccountname"][0];
                         $givenname = $data[$i]["givenname"][0];
                         $sn = $data[$i]["sn"][0];
-                        $mail = $data[$i]["mail"][0];
-                        dump($mail); exit;
+
+                        try {
+                            $mail = $data[$i]["mail"][0];
+                        } catch(\Exception $e) {
+                            echo "Votre email n'a pas encore été renseigné, veuillez le saisir ci-dessous : <br>";
+                            echo "<form method='post'>";
+                                echo "<input type='text' name='email' id='inputEmail' class='form-control' placeholder='Email' required autofocus>";
+                                // echo "<input type='hidden' name='_csrf_token' value='{{ csrf_token('authenticate') }}'>";
+                                echo "<button class='btn btn-lg btn-primary' type='submit'>Enregistrer</button>";
+                            echo "</form>";
+                            
+                            $mail = $_POST["email"];
+                            dump($mail); exit;
+                        }
+
                         $role = ["ROLE_USER"];
 
-                        if ($data[$i]["scriptpath"][0] == 'sio1.cmd' || $data[$i]["scriptpath"][0] == 'sio2.cmd') {
-                            $bts = '1';
-                        } elseif ($data[$i]["scriptpath"][0] == 'sam1.cmd' || $data[$i]["scriptpath"][0] == 'sam2.cmd') {
-                            $bts = '2';
-                        } elseif ($data[$i]["scriptpath"][0] == 'ag1.cmd' || $data[$i]["scriptpath"][0] == 'ag2.cmd') {
-                            $bts = '3';
-                        } elseif ($data[$i]["scriptpath"][0] == 'gpme1.cmd' || $data[$i]["scriptpath"][0] == 'gpme2.cmd') {
-                            $bts = '4';
-                        }
+                        // if ($data[$i]["scriptpath"][0] == 'sio1.cmd' || $data[$i]["scriptpath"][0] == 'sio2.cmd') {
+                        //     $bts = '1';
+                        // } elseif ($data[$i]["scriptpath"][0] == 'sam1.cmd' || $data[$i]["scriptpath"][0] == 'sam2.cmd') {
+                        //     $bts = '2';
+                        // } elseif ($data[$i]["scriptpath"][0] == 'ag1.cmd' || $data[$i]["scriptpath"][0] == 'ag2.cmd') {
+                        //     $bts = '3';
+                        // } elseif ($data[$i]["scriptpath"][0] == 'gpme1.cmd' || $data[$i]["scriptpath"][0] == 'gpme2.cmd') {
+                        //     $bts = '4';
+                        // }
                     }
 
                     // Créer des variables pour chaque donnée

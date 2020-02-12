@@ -61,7 +61,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="entreprise_liste_stagiaire", methods={"GET"})
+     * @Route("/{id}/liste", name="entreprise_liste_stagiaire", methods={"GET"})
      */
     public function listeStagiaire($id): Response
     {
@@ -75,7 +75,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="entreprise_show", methods={"GET"})
+     * @Route("/{id}/show", name="entreprise_show", methods={"GET"})
      */
     public function show(Entreprise $entreprise): Response
     {
@@ -105,7 +105,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="entreprise_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="entreprise_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Entreprise $entreprise): Response
     {

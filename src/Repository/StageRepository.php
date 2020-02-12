@@ -42,13 +42,13 @@ class StageRepository extends ServiceEntityRepository
         if ($search->getEleveStage()) {
             $query = $query
                 ->andWhere('s.eleve LIKE :eleveStage')
-                ->setParameter('eleveStage', $search->getEleveStage());
+                ->setParameter('eleveStage', '%'.$search->getEleveStage().'%');
         }
 
         if ($search->getBTSStage()) {
             $query = $query
-                ->andWhere('s.bts = :btsStage')
-                ->setParameter('btsStage', $search->getBTSStage());
+                ->andWhere('s.bts LIKE :btsStage')
+                ->setParameter('btsStage', '%'.$search->getBTSStage().'%');
         }
 
         return $query->getQuery()->getResult();

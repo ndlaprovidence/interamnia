@@ -4,15 +4,17 @@
 
 namespace App\Controller;
 
-use App\Entity\RechercheStage;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Entity\Stage;
 use App\Form\StageType;
+use App\Entity\RechercheStage;
 use App\Form\RechercheStageType;
 use App\Repository\StageRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/stage")
@@ -56,6 +58,28 @@ class StageController extends AbstractController
         return $this->render('stage/new.html.twig', [
             'stage' => $stage,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/pdf", name="stage_pdf", methods={"GET"})
+     */
+    public function pdf(StageRepository $stageRepository)
+    {
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        
+        $dompdf = new Dompdf($pdfOptions);
+        $stages = $stageRepository->findAll();
+        $html = $this->renderView('stage/pdf.html.twig', [
+            'stages' => $stages,
+        ]);
+        
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => true
         ]);
     }
 
