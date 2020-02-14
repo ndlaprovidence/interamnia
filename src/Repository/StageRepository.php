@@ -32,23 +32,37 @@ class StageRepository extends ServiceEntityRepository
         $emConfig->addCustomDatetimeFunction('DAY', 'DoctrineExtensions\Query\Mysql\Day');
 
         $query = $this->createQueryBuilder('s');
-        
+
+        $query->join(
+            'App\Entity\User',
+            'u',
+            'WITH',
+            'u.id = s.user'
+        );
+
+        $query->join(
+            'App\Entity\BTS',
+            'b',
+            'WITH',
+            'b.id = s.bts'
+        );
+
         if ($search->getDateStage()) {
             $query = $query
                 ->andWhere('YEAR(s.date_debut) = :dateStage')
-                ->setParameter('dateStage', $search->getDateStage());                
-            }
+                ->setParameter('dateStage', $search->getDateStage());
+        }
 
         if ($search->getEleveStage()) {
             $query = $query
-                ->andWhere('s.eleve LIKE :eleveStage')
-                ->setParameter('eleveStage', '%'.$search->getEleveStage().'%');
+                ->andWhere('u.nom LIKE :eleveStage')
+                ->setParameter('eleveStage', '%' . $search->getEleveStage() . '%');
         }
 
-        if ($search->getBTSStage()) {
+        if ($search->getBtsStage()) {
             $query = $query
-                ->andWhere('s.bts LIKE :btsStage')
-                ->setParameter('btsStage', '%'.$search->getBTSStage().'%');
+                ->andWhere('b.nom LIKE :btsStage') 
+                ->setParameter('btsStage', '%' . $search->getBtsStage() . '%');
         }
 
         return $query->getQuery()->getResult();

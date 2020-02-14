@@ -17,7 +17,8 @@
                 <th>Date de début</th>
                 <th>Date de fin</th>
                 <th>Thème du stage</th>
-                <th>Commentaire</th>
+                {# <th>Tuteur</th> #}
+                {# <th>Commentaire</th> #}
                 <th>Actions</th>
             </tr>
         </thead>
@@ -30,7 +31,8 @@
                 <td>{{ stages.dateDebut|date('d-m-Y') }}</td>
                 <td>{{ stages.dateFin|date('d-m-Y') }}</td>
                 <td>{{ stages.theme }}</td>
-                <td>{{ stages.commentaire }}</td>
+                {# <td>{{ stages.user }}</td> #}
+                {# <td>{{ stages.commentaire }}</td> #}
                 <td>
                     <a href="{{ path('stage_show', {'id': stages.id}) }}">Afficher</a>
                     <a href="{{ path('stage_edit', {'id': stages.id}) }}">Modifier</a>

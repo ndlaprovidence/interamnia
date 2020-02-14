@@ -62,10 +62,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        global $login, $givenname, $sn, $role, $bts;
+        global $login, $givenname, $sn, $role;
 
-        $ldaprdn  = 'btssio';
-        $ldappass = 'sisr';   
+        $ldaprdn  = $credentials['login'];
+        $ldappass = $credentials['password'];   
         $credentials_login = $credentials['login'];
 
         $ldapconn = ldap_connect("172.16.122.250") or die ("Impossible de se connecter au serveur LDAP.");
@@ -100,19 +100,19 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
                         $givenname = $data[$i]["givenname"][0];
                         $sn = $data[$i]["sn"][0];
 
-                        try {
-                            $mail = $data[$i]["mail"][0];
-                        } catch(\Exception $e) {
-                            echo "Votre email n'a pas encore été renseigné, veuillez le saisir ci-dessous : <br>";
-                            echo "<form method='post'>";
-                                echo "<input type='text' name='email' id='inputEmail' class='form-control' placeholder='Email' required autofocus>";
-                                // echo "<input type='hidden' name='_csrf_token' value='{{ csrf_token('authenticate') }}'>";
-                                echo "<button class='btn btn-lg btn-primary' type='submit'>Enregistrer</button>";
-                            echo "</form>";
-                            
-                            $mail = $_POST["email"];
-                            dump($mail); exit;
-                        }
+                        // try {
+                        //     $mail = $data[$i]["mail"][0];
+                        // } catch(\Exception $e) {
+                        //     echo "Votre email n'a pas encore été renseigné, veuillez le saisir ci-dessous : <br>";
+                        //     echo "<form method='post'>";
+                        //         echo "<input type='text' name='email' id='inputEmail' class='form-control' placeholder='Email' required autofocus>";
+                        //         // echo "<input type='hidden' name='_csrf_token' value='{{ csrf_token('authenticate') }}'>";
+                        //         echo "<button class='btn btn-lg btn-primary' type='submit'>Enregistrer</button>";
+                        //     echo "</form>";
+                        //     // Attendre l'envoie du formulaire
+                        //     $mail = $_POST["email"];
+                        //     dump($mail); exit;
+                        // }
 
                         $role = ["ROLE_USER"];
 
@@ -135,7 +135,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
                         // $user->setBTS($bts);
                         $user->setNom($sn);
                         $user->setPrenom($givenname);
-                        $user->setEmail($mail);
+                        //$user->setEmail($mail);
                         $user->setLogin($login);
                         $user->setRoles($role);
                         $user->setPassword($this->passwordEncoder->encodePassword(

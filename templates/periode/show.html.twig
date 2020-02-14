@@ -3,28 +3,24 @@
 {% block title %}Periode{% endblock %}
 
 {% block body %}
-    <h1>Periode</h1>
+    <h1>Période</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ periode.id }}</td>
-            </tr>
-            <tr>
-                <th>Date_debut</th>
+                <th>Date de début</th>
                 <td>{{ periode.dateDebut ? periode.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Date_fin</th>
+                <th>Date de fin</th>
                 <td>{{ periode.dateFin ? periode.dateFin|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('periode_index') }}">back to list</a>
+    <a href="{{ path('periode_index') }}">Retour</a>
 
-    <a href="{{ path('periode_edit', {'id': periode.id}) }}">edit</a>
+    <a href="{{ path('periode_edit', {'id': periode.id}) }}">Modifier</a>
 
     {{ include('periode/_delete_form.html.twig') }}
 {% endblock %}

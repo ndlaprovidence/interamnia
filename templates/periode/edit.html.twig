@@ -3,11 +3,11 @@
 {% block title %}Edit Periode{% endblock %}
 
 {% block body %}
-    <h1>Edit Periode</h1>
+    <h1>Modifier la période</h1>
 
-    {{ include('periode/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('periode/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    <a href="{{ path('periode_index') }}">back to list</a>
+    <a href="{{ path('periode_index') }}">Retour</a>
 
     {{ include('periode/_delete_form.html.twig') }}
 {% endblock %}

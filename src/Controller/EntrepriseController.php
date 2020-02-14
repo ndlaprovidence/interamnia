@@ -7,6 +7,7 @@ use App\Entity\Entreprise;
 use App\Form\EntrepriseType;
 use App\Entity\RechercheEntreprise;
 use App\Form\RechercheEntrepriseType;
+use App\Repository\ContactRepository;
 use App\Repository\EntrepriseRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,16 +24,18 @@ class EntrepriseController extends AbstractController
      * @Route("/", name="entreprise_index", methods={"GET"})
      * @return Response
      */
-    public function index(EntrepriseRepository $entrepriseRepository, Request $request): Response
+    public function index(EntrepriseRepository $entrepriseRepository, Request $request, ContactRepository $contactRepository): Response
     {
         $search = new RechercheEntreprise();
         $form = $this->createForm(RechercheEntrepriseType::class, $search);
         $form->handleRequest($request);
 
         $entreprises = $entrepriseRepository->findAllVisibleQuery($search);
+        $contact = $contactRepository->findOneBy(['entreprise' => $entreprises]);
         
         return $this->render('entreprise/index.html.twig', [
             'entreprises' => $entreprises,
+            'contact' => $contact,
             'formSearch' => $form->createView()
         ]);
     }

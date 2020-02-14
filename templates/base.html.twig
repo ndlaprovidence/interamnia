@@ -47,9 +47,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('contact_index') }}">Contact</a>
                         </li>
-                        <li class="nav-item">
+                        {# <li class="nav-item">
                             <a class="nav-link" href="{{ path('periode_index') }}">Période</a>
-                        </li>
+                        </li> #}
                     {% endif %}
                 </ul>
                 <ul class="navbar-nav">
@@ -66,9 +66,9 @@
                             <a class="nav-link" href="{{ path('app_logout') }}">{{'Logout'|trans}}</a>
                         </li>
                     {% else %}
-                        <li>
+                        {# <li>
                             <a class="nav-link {% if '/app_register' in app.request.server.get('REQUEST_URI') %} active {% endif %}" href="{{ path('app_register') }}">{{'Sign up'|trans}}</a>
-                        </li>
+                        </li> #}
                         <li>
                             <a class="nav-link {% if '/app_login' in app.request.server.get('REQUEST_URI') %} active {% endif %}" href="{{ path('app_login') }}">{{'Sign in'|trans}}</a>
                         </li>

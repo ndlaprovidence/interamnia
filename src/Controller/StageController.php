@@ -6,7 +6,9 @@ namespace App\Controller;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use App\Entity\User;
 use App\Entity\Stage;
+use App\Form\UserType;
 use App\Form\StageType;
 use App\Entity\RechercheStage;
 use App\Form\RechercheStageType;
@@ -22,20 +24,38 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class StageController extends AbstractController
 {
     /**
-     * @Route("/", name="stage_index", methods={"GET"})
+     * @Route("/", name="stage_index", methods={"GET","POST"})
      */
     public function index(StageRepository $stageRepository, Request $request): Response
     {
-        $search = new RechercheStage();
-        $form = $this->createForm(RechercheStageType::class, $search);
-        $form->handleRequest($request);
+        $user = $this->getUser();
 
-        $stages = $stageRepository->findAllVisibleQuery($search);
+        if (empty($user->getEmail())) {
+            $form = $this->createForm(UserType::class, $user, ['email_only' => true]);
+            $form->handleRequest($request);
 
-        return $this->render('stage/index.html.twig', [
-            'stages' => $stages,
-            'formSearch' => $form->createView(),
-        ]);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirectToRoute('stage_index');
+            }
+
+            return $this->render('user/set-email.html.twig', [
+                'user' => $user,
+                'form' => $form->createView(),
+            ]);
+        } else {
+            $search = new RechercheStage();
+            $form = $this->createForm(RechercheStageType::class, $search);
+            $form->handleRequest($request);
+
+            $stages = $stageRepository->findAllVisibleQuery($search);
+
+            return $this->render('stage/index.html.twig', [
+                'stages' => $stages,
+                'formSearch' => $form->createView(),
+            ]);
+        }
     }
 
     /**
@@ -68,13 +88,13 @@ class StageController extends AbstractController
     {
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
-        
+
         $dompdf = new Dompdf($pdfOptions);
         $stages = $stageRepository->findAll();
         $html = $this->renderView('stage/pdf.html.twig', [
             'stages' => $stages,
         ]);
-        
+
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
@@ -118,7 +138,7 @@ class StageController extends AbstractController
      */
     public function delete(Request $request, Stage $stage): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$stage->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $stage->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($stage);
             $entityManager->flush();
