@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Stage;
+use App\Form\UserType;
 use App\Entity\Entreprise;
 use App\Form\EntrepriseType;
 use App\Entity\RechercheEntreprise;
@@ -21,23 +23,41 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EntrepriseController extends AbstractController
 {
     /**
-     * @Route("/", name="entreprise_index", methods={"GET"})
+     * @Route("/", name="entreprise_index", methods={"GET","POST"})
      * @return Response
      */
     public function index(EntrepriseRepository $entrepriseRepository, Request $request, ContactRepository $contactRepository): Response
     {
-        $search = new RechercheEntreprise();
-        $form = $this->createForm(RechercheEntrepriseType::class, $search);
-        $form->handleRequest($request);
+        $user = $this->getUser();
 
-        $entreprises = $entrepriseRepository->findAllVisibleQuery($search);
-        $contact = $contactRepository->findOneBy(['entreprise' => $entreprises]);
-        
-        return $this->render('entreprise/index.html.twig', [
-            'entreprises' => $entreprises,
-            'contact' => $contact,
-            'formSearch' => $form->createView()
-        ]);
+        if (empty($user->getEmail())) {
+            $form = $this->createForm(UserType::class, $user, ['email_only' => true]);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirectToRoute('stage_index');
+            }
+
+            return $this->render('user/set-email.html.twig', [
+                'user' => $user,
+                'form' => $form->createView(),
+            ]);
+        } else {
+            $search = new RechercheEntreprise();
+            $form = $this->createForm(RechercheEntrepriseType::class, $search);
+            $form->handleRequest($request);
+
+            $entreprises = $entrepriseRepository->findAllVisibleQuery($search);
+            $contact = $contactRepository->findOneBy(['entreprise' => $entreprises]);
+            
+            return $this->render('entreprise/index.html.twig', [
+                'entreprises' => $entreprises,
+                'contact' => $contact,
+                'formSearch' => $form->createView()
+            ]);
+        }
     }
 
     /**
