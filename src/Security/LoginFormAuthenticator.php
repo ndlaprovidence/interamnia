@@ -64,18 +64,25 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         global $login, $givenname, $sn, $role;
 
+        $user = null;
+
         $ldaprdn  = $credentials['login'];
         $ldappass = $credentials['password'];   
         $credentials_login = $credentials['login'];
+        dump($credentials_login);
 
-        $ldapconn = ldap_connect("172.16.122.250") or die ("Impossible de se connecter au serveur LDAP.");
+        $ldapconn = ldap_connect("ldap://172.16.122.250") or die ("Impossible de se connecter au serveur LDAP.");
 
         if ($ldapconn) {
 
-            $ldapbind = ldap_bind($ldapconn, $ldaprdn, $ldappass);
-        
+            ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
+            ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
+            
+            $ldapbind = ldap_bind($ldapconn, $ldaprdn."@ndlp.fr", $ldappass);
+            // $ldapbind = @ldap_bind($ldapconn, $ldaprdn, $ldappass);
+
             if ($ldapbind) {
-                // echo "Connexion LDAP réussie !";
+                dump("Connexion LDAP réussie !");
                 $token = new CsrfToken('authenticate', $credentials['csrf_token']);
                 if (!$this->csrfTokenManager->isTokenValid($token)) {
                     throw new InvalidCsrfTokenException();
@@ -91,9 +98,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
                     $user->setLogin($credentials_login);
 
-                    $sr = ldap_search($ldapconn, "ou=bts, ou=Eleves, ou=utilisateurs, dc=ndlp, dc=fr", "sAMAccountName=$credentials_login");
+
+                    // $sr = ldap_search($ldapconn, "ou=bts, ou=Eleves, ou=utilisateurs, dc=ndlp, dc=fr", "sAMAccountName=$credentials_login");
+                    $sr = ldap_search($ldapconn, "OU=utilisateurs,DC=ndlp,DC=fr", "sAMAccountName=$credentials_login");
+                    // $sr = ldap_search($ldapconn, "ou=bts, ou=Eleves, ou=utilisateurs, dc=ndlp, dc=fr", "sn=$credentials_login");
                     $data = ldap_get_entries($ldapconn, $sr);
-                    // dump($data);
+                    dump($data);
 
                     for ($i=0; $i<$data["count"]; $i++) {
                         $login = $data[$i]["samaccountname"][0];
@@ -127,6 +137,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
                         // }
                     }
 
+                    dump($user->getLogin());
                     // Créer des variables pour chaque donnée
                     if ($user->getLogin() == $login) {
                         // $entityManager = $this->getDoctrine()->getManager();
@@ -153,6 +164,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
                         // https://symfony.com/doc/current/reference/forms/types/hidden.html
                     } else {
                         //fail authentication with a custom error
+                        dump("fail authentication with a custom error : ");
                         throw new CustomUserMessageAuthenticationException('Nom d\'utilisateur introuvable !');
                     }
                 }
@@ -163,7 +175,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
                 // print_r($data);   
                 // echo '</pre>';
             } else {
-                // echo "Connexion LDAP échouée !";
+                dump("Connexion LDAP échouée !");
             }
         }
         return $user;
