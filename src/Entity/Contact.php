@@ -39,7 +39,7 @@ class Contact
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Entreprise")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $entreprise;
 
