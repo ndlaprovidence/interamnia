@@ -3,9 +3,14 @@
 {% block title %}New Entreprise{% endblock %}
 
 {% block body %}
-    <h1>Créer une nouvelle entreprise</h1>
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <h1>Créer une nouvelle entreprise</h1>
 
-    {{ include('entreprise/_form.html.twig') }}
+        {{ include('entreprise/_form.html.twig') }}
 
-    <a href="{{ path('entreprise_index') }}">Retour</a>
+        <a href="{{ path('entreprise_index') }}">Retour</a>
+    {% endif %}
 {% endblock %}
+    
+       
+    
