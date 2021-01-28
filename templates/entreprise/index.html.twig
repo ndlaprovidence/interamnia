@@ -3,6 +3,7 @@
 {% block title %}Entreprise index{% endblock %}
 
 {% block body %}
+    
 
     {{ include('entreprise/search.html.twig') }}
 
@@ -27,6 +28,9 @@
 
     <h1>Entreprise</h1>
 
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <a href="{{ path('entreprise_new') }}">Créer</a>
+    {% endif %}
     <table class="table">
         <thead>
             <tr>
@@ -72,7 +76,5 @@
         </tbody>
     </table>
 
-    {% if is_granted('ROLE_SUPER_ADMIN') %}
-        <a href="{{ path('entreprise_new') }}">Créer</a>
-    {% endif %}
+    
 {% endblock %}
