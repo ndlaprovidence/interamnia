@@ -7,10 +7,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="tbl_contact")
- * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
+ * @ORM\Table(name="tbl_prof")
+ * @ORM\Entity(repositoryClass="App\Repository\ProfRepository")
  */
-class Contact
+class Prof
 {
     /**
      * @ORM\Id()
@@ -25,28 +25,17 @@ class Contact
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $telephone;
+    private $en_activite;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $email;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Entreprise")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $entreprise;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Stage", mappedBy="contact_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\Stage", mappedBy="prof_id")
      */
     private $stages;
 
@@ -77,45 +66,21 @@ class Contact
         return $this->prenom;
     }
 
-    public function setPrenom(?string $prenom): self
+    public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
 
         return $this;
     }
 
-    public function getTelephone(): ?string
+    public function getEnActivite(): ?int
     {
-        return $this->telephone;
+        return $this->en_activite;
     }
 
-    public function setTelephone(?string $telephone): self
+    public function setEnActivite(?int $en_activite): self
     {
-        $this->telephone = $telephone;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(?string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getEntreprise(): ?Entreprise
-    {
-        return $this->entreprise;
-    }
-
-    public function setEntreprise(?Entreprise $entreprise): self
-    {
-        $this->entreprise = $entreprise;
+        $this->en_activite = $en_activite;
 
         return $this;
     }
@@ -132,7 +97,7 @@ class Contact
     {
         if (!$this->stages->contains($stage)) {
             $this->stages[] = $stage;
-            $stage->setContactId($this);
+            $stage->setProfId($this);
         }
 
         return $this;
@@ -143,8 +108,8 @@ class Contact
         if ($this->stages->contains($stage)) {
             $this->stages->removeElement($stage);
             // set the owning side to null (unless already changed)
-            if ($stage->getContactId() === $this) {
-                $stage->setContactId(null);
+            if ($stage->getProfId() === $this) {
+                $stage->setProfId(null);
             }
         }
 
