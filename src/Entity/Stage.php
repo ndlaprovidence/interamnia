@@ -18,12 +18,12 @@ class Stage
     private $id;
 
     /**
-     * @ORM\Column(type="date", length=255)
+     * @ORM\Column(type="date", length=255, nullable=true)
      */
     private $date_debut;
 
     /**
-     * @ORM\Column(type="date", length=255)
+     * @ORM\Column(type="date", length=255, nullable=true)
      */
     private $date_fin;
 
@@ -65,10 +65,13 @@ class Stage
      */
     private $contact;
 
+
+
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Periode", inversedBy="stages")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $nom_periode;
+    private $periode;
 
     public function getId(): ?int
     {
@@ -185,16 +188,17 @@ class Stage
     
     
 
-    public function getNomPeriode(): ?string
+
+    public function getPeriode(): ?Periode
     {
-        return $this->nom_periode;
+        return $this->periode;
     }
 
-    public function setNomPeriode(?string $nom_periode): self
+    public function setPeriode(?Periode $periode): self
     {
-        $this->nom_periode = $nom_periode;
+        $this->periode = $periode;
 
         return $this;
     }
-    
+
 }

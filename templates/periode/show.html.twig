@@ -8,12 +8,18 @@
     <table class="table">
         <tbody>
             <tr>
+            
+                <th>Nom_période</th>
+                <td>{{ periode.nomPeriode }}</td>
+            </tr>
+            <tr>
+
                 <th>Date de début</th>
-                <td>{{ periode.dateDebut ? periode.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ periode.dateDebut ? periode.dateDebut|date('d-m-Y') : '' }}</td>
             </tr>
             <tr>
                 <th>Date de fin</th>
-                <td>{{ periode.dateFin ? periode.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ periode.dateFin ? periode.dateFin|date('d-m-Y') : '' }}</td>
             </tr>
         </tbody>
     </table>

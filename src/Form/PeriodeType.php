@@ -13,16 +13,9 @@ class PeriodeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date_debut', DateType::class, [
-                'widget' => 'single_text',
-                'attr' => ['class' => 'js-datepicker'],
-                'html5' => false,
-            ])
-            ->add('date_fin', DateType::class, [
-                'widget' => 'single_text',
-                'attr' => ['class' => 'js-datepicker'],
-                'html5' => false,
-            ]);
+            ->add('nom_periode')
+            ->add('date_debut')
+            ->add('date_fin');
     }
 
     public function configureOptions(OptionsResolver $resolver)

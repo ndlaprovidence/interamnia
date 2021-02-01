@@ -36,8 +36,7 @@
                     {% endif %}
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('user_index') }}">Utilisateurs </a>
-                            
+                            <a class="nav-link" href="{{ path('user_index') }}">Utilisateurs </a>   
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('activite_entreprise_index') }}">Activitées</a>
@@ -50,6 +49,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('prof_index') }}">Professeurs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('periode_index') }}"> Periodes </a>                            
                         </li>
                         {# <li class="nav-item">
                             <a class="nav-link" href="{{ path('periode_index') }}">Période</a>
