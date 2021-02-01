@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Stage{% endblock %}
+
+{% block body %}
+    <h1>Le stage</h1>
+
+    {{ include('stage/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <a href="{{ path('stage_index') }}">Retour</a>
+
+    {{ include('stage/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ActiviteEntreprise index{% endblock %}
+
+{% block body %}
+    <h1>Activité d'une entreprise</h1>
+    <a href="{{ path('activite_entreprise_new') }}">Créer</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Activité</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for activite_entreprise in activite_entreprises %}
+            <tr>
+                <td>{{ activite_entreprise.activite }}</td>
+                <td>
+                    <a href="{{ path('activite_entreprise_show', {'id': activite_entreprise.id}) }}">Afficher</a>
+                    <a href="{{ path('activite_entreprise_edit', {'id': activite_entreprise.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune données trouvées</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

@@ -1,0 +1,46 @@
+{# ./templates/default/mypdf.html.twig #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <title>Title of the PDF</title>
+    </head>
+    <body>
+        <h1>Stages</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>BTS</th>
+                    <th>Entreprise</th>
+                    <th>Période</th>   
+                    <th>Date de début</th>
+                    <th>Date de fin</th>
+                    <th>Thème du stage</th>
+                    <th>Commentaire</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for stages in stages %}
+                <tr>
+                    <td>{{ stages.user }}</td>
+                    <td>{{ stages.bts }}</td>
+                    <td>{{ stages.entreprise }}</td>
+                    <td>{{ stages.entreprise }}</td>
+                    <td>{{ stages.dateDebut|date('d-m-Y') }}</td>
+                    <td>{{ stages.dateFin|date('d-m-Y') }}</td>
+                    <td>{{ stages.theme }}</td>
+                    <td>{{ stages.commentaire }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </body>
+</html>

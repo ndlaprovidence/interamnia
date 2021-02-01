@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BTS index{% endblock %}
+
+{% block body %}
+    <h1>BTS</h1>
+    <a href="{{ path('b_t_s_new') }}">Créer</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Spécialisation</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for b_t in b_t_ss %}
+            <tr>
+                <td>{{ b_t.nom }}</td>
+                <td>{{ b_t.specialisation }}</td>
+                <td>
+                    <a href="{{ path('b_t_s_show', {'id': b_t.id}) }}">Afficher</a>
+                    <a href="{{ path('b_t_s_edit', {'id': b_t.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune données trouvées</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

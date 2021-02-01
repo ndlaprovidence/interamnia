@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Periode index{% endblock %}
+
+{% block body %}
+    <h1>Période de stages</h1>
+    <a href="{{ path('periode_new') }}">Créer</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom_période</th>                
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for periode in periodes %}
+            <tr>
+                <td>{{ periode.nomPeriode }}</td>
+                <td>{{ periode.dateDebut ? periode.dateDebut|date('d/m/Y') : '' }}</td>
+                <td>{{ periode.dateFin ? periode.dateFin|date('d/m/Y') : '' }}</td>
+                
+                <td>
+                    <a href="{{ path('periode_show', {'id': periode.id}) }}">Afficher</a>
+                    <a href="{{ path('periode_edit', {'id': periode.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucune données trouvées</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}
