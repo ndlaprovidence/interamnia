@@ -58,12 +58,12 @@ class Stage
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Prof", inversedBy="stages")
      */
-    private $prof_id;
+    private $prof;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Contact", inversedBy="stages")
      */
-    private $contact_id;
+    private $contact;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -159,34 +159,31 @@ class Stage
         return $this;
     }
 
-    public function getProfId(): ?Prof
+    public function getProf(): ?Prof
     {
-        return $this->prof_id;
+        return $this->prof;
     }
 
-    public function setProfId(?Prof $prof_id): self
+    public function setProf(?Prof $prof): self
     {
-        $this->prof_id = $prof_id;
+        $this->prof = $prof;
 
         return $this;
     }
 
-    public function getContactId(): ?Contact
+    public function getContact(): ?Contact
     {
-        return $this->contact_id;
+        return $this->contact;
     }
 
-    public function setContactId(?Contact $contact_id): self
+    public function setContact(?Contact $contact): self
     {
-        $this->contact_id = $contact_id;
+        $this->contact = $contact;
 
         return $this;
     }
     
-    public function __toString()
-    {
-        return $this->getTitle() ?: '';
-    }
+    
 
     public function getNomPeriode(): ?string
     {
@@ -198,5 +195,9 @@ class Stage
         $this->nom_periode = $nom_periode;
 
         return $this;
+    }
+
+    public function __toString() {
+        return $this->contact ;
     }
 }

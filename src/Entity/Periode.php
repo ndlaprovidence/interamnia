@@ -27,6 +27,11 @@ class Periode
      */
     private $date_fin;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nom_periode;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,18 @@ class Periode
     public function setDateFin(\DateTimeInterface $date_fin): self
     {
         $this->date_fin = $date_fin;
+
+        return $this;
+    }
+
+    public function getNomPeriode(): ?string
+    {
+        return $this->nom_periode;
+    }
+
+    public function setNomPeriode(?string $nom_periode): self
+    {
+        $this->nom_periode = $nom_periode;
 
         return $this;
     }

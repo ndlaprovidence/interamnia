@@ -46,7 +46,7 @@ class Contact
     private $entreprise;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Stage", mappedBy="contact_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\Stage", mappedBy="contact")
      */
     private $stages;
 
@@ -150,4 +150,8 @@ class Contact
 
         return $this;
     }
+    public function __toString() {
+        return $this->nom ;
+    }
+    
 }

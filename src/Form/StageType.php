@@ -25,9 +25,9 @@ class StageType extends AbstractType
             // ->add('user') // Choisir uniquement les profs parmis les utilisateurs (EntityType -> Where RoleP = Admin)
             ->add('bts')
             ->add('entreprise')
-            ->add('contact', DateType::class, [
-                'widget' => 'choice',
-            ])
+            ->add('contact')
+            ->add('prof')
+            
             
             
             

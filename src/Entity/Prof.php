@@ -35,7 +35,7 @@ class Prof
     private $en_activite;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Stage", mappedBy="prof_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\Stage", mappedBy="prof")
      */
     private $stages;
 
@@ -114,5 +114,8 @@ class Prof
         }
 
         return $this;
+    }
+    public function __toString() {
+        return $this->nom. ' '.$this->prenom ;
     }
 }
