@@ -28,15 +28,16 @@
                 <ul class="navbar-nav mr-auto">
                     {% if is_granted('ROLE_USER') %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('entreprise_index') }}">Entreprise</a>
+                            <a class="nav-link" href="{{ path('entreprise_index') }}">Entreprises</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('stage_index') }}">Stage</a>
+                            <a class="nav-link" href="{{ path('stage_index') }}">Stages</a>
                         </li>
                     {% endif %}
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('user_index') }}">{{ 'User'|trans }}</a>
+                            <a class="nav-link" href="{{ path('user_index') }}">Utilisateurs </a>
+                            
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('activite_entreprise_index') }}">Activitées</a>
@@ -45,10 +46,10 @@
                             <a class="nav-link" href="{{ path('b_t_s_index') }}">BTS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('contact_index') }}">Contact</a>
+                            <a class="nav-link" href="{{ path('contact_index') }}">Contacts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('prof_index') }}">Professeur</a>
+                            <a class="nav-link" href="{{ path('prof_index') }}">Professeurs</a>
                         </li>
                         {# <li class="nav-item">
                             <a class="nav-link" href="{{ path('periode_index') }}">Période</a>
