@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stagiaire{% endblock %}
+
+{% block body %}
+    <h1>Liste des stagiaires</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stagiaire in stagiaires %}
+                <tr>
+                    <td>{{ stagiaire.nom }}</td>
+                    <td>{{ stagiaire.prenom }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('entreprise_index') }}">Retour</a>
+
+    {# {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <a href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">Modifier</a>
+    {% endif %}
+
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        {{ include('entreprise/_delete_form.html.twig') }}
+    {% endif %} #}
+{% endblock %}

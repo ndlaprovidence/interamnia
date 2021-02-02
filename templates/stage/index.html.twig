@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stage index{% endblock %}
+
+{% block body %}
+
+    {{ include('stage/search.html.twig') }}
+
+    <h1>Stages</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>BTS</th>
+                <th>Entreprise</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Thème du stage</th>
+                {# <th>Tuteur</th> #}
+                {# <th>Commentaire</th> #}
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stages in stages %}
+            <tr>
+                <td>{{ stages.user }}</td>
+                <td>{{ stages.bts }}</td>
+                <td>{{ stages.entreprise }}</td>
+                <td>{{ stages.dateDebut|date('d-m-Y') }}</td>
+                <td>{{ stages.dateFin|date('d-m-Y') }}</td>
+                <td>{{ stages.theme }}</td>
+                {# <td>{{ stages.user }}</td> #}
+                {# <td>{{ stages.commentaire }}</td> #}
+                <td>
+                    <a href="{{ path('stage_show', {'id': stages.id}) }}">Afficher</a>
+                    <a href="{{ path('stage_edit', {'id': stages.id}) }}">Modifier</a>
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <a href="{{ path('stage_pdf') }}">Imprimer</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucune données trouvées</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('stage_new') }}">Créer</a>
+{% endblock %}

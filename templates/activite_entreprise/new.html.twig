@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ActiviteEntreprise{% endblock %}
+
+{% block body %}
+    <h1>Créer une nouvelle activité</h1>
+
+    {{ include('activite_entreprise/_form.html.twig') }}
+
+    <a href="{{ path('activite_entreprise_index') }}">Retour</a>
+{% endblock %}

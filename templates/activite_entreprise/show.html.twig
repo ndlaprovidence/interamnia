@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ActiviteEntreprise{% endblock %}
+
+{% block body %}
+    <h1>Activité de l'entreprise</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Activité</th>
+                <td>{{ activite_entreprise.activite }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('activite_entreprise_index') }}">Retour</a>
+
+    <a href="{{ path('activite_entreprise_edit', {'id': activite_entreprise.id}) }}">Modifier</a>
+
+    {{ include('activite_entreprise/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entreprise{% endblock %}
+
+{% block body %}
+    <h1>Entreprise</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ entreprise.nom }}</td>
+            </tr>
+            <tr>
+                <th>Région</th>
+                <td>{{ entreprise.region }}</td>
+            </tr>
+            <tr>
+                <th>Département</th>
+                <td>{{ entreprise.departement }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ entreprise.ville }}</td>
+            </tr>
+            <tr>
+                <th>Code postal</th>
+                <td>{{ entreprise.codePostal }}</td>
+            </tr>
+            <tr>
+                <th>Rue</th>
+                <td>{{ entreprise.rue }}</td>
+            </tr>
+            <tr>
+                <th>Téléphone</th>
+                <td>{{ entreprise.telephone }}</td>
+            </tr>
+            <tr>
+                <th>E-mail</th>
+                <td>{{ entreprise.email }}</td>
+            </tr>
+            <tr>
+                <th>Activité</th>
+                <td>{{ entreprise.activite }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('entreprise_index') }}">Retour</a>
+
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <a href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">Modifier</a>
+    {% endif %}
+
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        {{ include('entreprise/_delete_form.html.twig') }}
+    {% endif %}
+{% endblock %}

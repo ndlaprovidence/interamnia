@@ -53,7 +53,21 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_show", methods={"GET"})
+     * @Route("/{id}/profil", name="user_profil", methods={"GET"})
+     */
+    public function profilUtilisateur($id): Response
+    {
+        $users = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findDataOfUser($id);
+
+        return $this->render('user/profil.html.twig', [
+            'profils' => $users,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/show", name="user_show", methods={"GET"})
      */
     public function show(User $user): Response
     {
@@ -83,7 +97,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="user_delete", methods={"DELETE"})
      */
     public function delete(Request $request, User $user): Response
     {

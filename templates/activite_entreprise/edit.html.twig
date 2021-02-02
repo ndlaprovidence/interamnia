@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ActiviteEntreprise{% endblock %}
+
+{% block body %}
+    <h1>Modifier l'activité</h1>
+
+    {{ include('activite_entreprise/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <a href="{{ path('activite_entreprise_index') }}">Retour</a>
+
+    {{ include('activite_entreprise/_delete_form.html.twig') }}
+{% endblock %}

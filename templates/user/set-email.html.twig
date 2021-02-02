@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+    <h1>Renseigner son email</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.email.first) }}
+        {{ form_row(form.email.second) }}
+        <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+
+
+{% endblock %}

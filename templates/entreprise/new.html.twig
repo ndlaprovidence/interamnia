@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Entreprise{% endblock %}
+
+{% block body %}
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <h1>Créer une nouvelle entreprise</h1>
+
+        {{ include('entreprise/_form.html.twig') }}
+
+        <a href="{{ path('entreprise_index') }}">Retour</a>
+    {% endif %}
+{% endblock %}
+    
+       
+    

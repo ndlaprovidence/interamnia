@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <h1>Profil de l'utilisateur</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Région</th>
+                <th>Ville</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Thème</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for profil in profils %}
+                <tr>
+                    <td>{{ profil.nom }}</td>
+                    <td>{{ profil.region }}</td>
+                    <td>{{ profil.ville }}</td>
+                    <td>{{ profil.date_debut|date('d-m-Y') }}</td>
+                    <td>{{ profil.date_fin|date('d-m-Y') }}</td>
+                    <td>{{ profil.theme }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_index') }}">Retour</a>
+
+    {# {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <a href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">Modifier</a>
+    {% endif %}
+
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        {{ include('entreprise/_delete_form.html.twig') }}
+    {% endif %} #}
+{% endblock %}

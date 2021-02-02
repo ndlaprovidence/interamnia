@@ -21,9 +21,24 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $prenom;
+
+    /**
+     * @ORM\Column(type="string", length=180, unique=true, nullable=true)
      */
     private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $login;
 
     /**
      * @ORM\Column(type="json")
@@ -35,10 +50,38 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+    
+    public function __construct() {
+        $this->nom = "Utilisateur inconnu";
+    }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -46,9 +89,21 @@ class User implements UserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getLogin(): ?string
+    {
+        return $this->login;
+    }
+
+    public function setLogin(string $login): self
+    {
+        $this->login = $login;
 
         return $this;
     }
@@ -112,5 +167,9 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function __toString() {
+        return $this->nom . " " . $this->prenom;
     }
 }

@@ -1,0 +1,24 @@
+{% block title %}{% endblock %}
+
+{% block body %}
+<div class="jumbotron">
+    <div class="container">
+        {{ form_start(formSearch) }}
+        <div class="form-row">
+            <div class="col">
+                {{ form_row(formSearch.dateStage) }}
+            </div>
+            <div class="col">
+                {{ form_row(formSearch.eleveStage) }}
+            </div>
+            <div class="col">
+                {{ form_row(formSearch.btsStage) }}
+            </div>
+            <div class="col">
+                <button class="btn btn-primary">Rechercher</button>
+            </div>
+        </div>
+        {{ form_end(formSearch) }}
+    </div>
+</div>
+{% endblock %}
