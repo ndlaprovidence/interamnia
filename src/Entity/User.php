@@ -50,6 +50,16 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $promotion;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\BTS", inversedBy="users")
+     */
+    private $bts;
     
     public function __construct() {
         $this->nom = "Utilisateur inconnu";
@@ -171,5 +181,29 @@ class User implements UserInterface
 
     public function __toString() {
         return $this->nom . " " . $this->prenom;
+    }
+
+    public function getPromotion(): ?int
+    {
+        return $this->promotion;
+    }
+
+    public function setPromotion(?int $promotion): self
+    {
+        $this->promotion = $promotion;
+
+        return $this;
+    }
+
+    public function getBtsId(): ?BTS
+    {
+        return $this->bts;
+    }
+
+    public function setBtsId(?BTS $bts): self
+    {
+        $this->bts = $bts;
+
+        return $this;
     }
 }

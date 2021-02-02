@@ -8,6 +8,14 @@
     <table class="table">
         <tbody>
             <tr>
+                <th>Nom</th>
+                <td>{{ stage.user }}</td>
+            </tr>
+            <tr>
+                <th>BTS</th>
+                <td>{{ stage.bts }}</td>
+            </tr>
+            <tr>
                 <th>Date_debut</th>
                 <td>{{ stage.dateDebut|date('d-m-Y') }}</td>
             </tr>
@@ -19,6 +27,26 @@
                 <th>Theme</th>
                 <td>{{ stage.theme }}</td>
             </tr>
+            <tr>
+                <th>Entreprise</th>
+                <td>{{ stage.entreprise }}</td>
+            </tr>
+            <tr>
+                <th>Période</th>
+                <td>{{ stage.periode }}</td>
+            </tr>
+            <tr>
+                <th>Nom Professeurs</th>
+                <td>{{ stage.prof }}</td>
+            </tr>
+            <tr>
+                <th>Contact</th>
+                <td>{{ stage.contact }}</td>
+            </tr>
+            
+                                    
+                
+                
             {# <tr>
                 <th>Commentaire</th>
                 <td>{{ stage.commentaire }}</td>

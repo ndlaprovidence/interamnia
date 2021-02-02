@@ -8,15 +8,19 @@
 
     <h1>Stages</h1>
 
+    <a href="{{ path('stage_new') }}">Créer</a>
     <table class="table">
         <thead>
             <tr>
                 <th>Nom</th>
                 <th>BTS</th>
-                <th>Entreprise</th>
+                <th>Entreprise</th>  
+                <th>Période</th>         
+                <th>Thème du stage</th>
+                <th>Nom Professeurs</th>
+                <th>Contact</th>
                 <th>Date de début</th>
                 <th>Date de fin</th>
-                <th>Thème du stage</th>
                 {# <th>Tuteur</th> #}
                 {# <th>Commentaire</th> #}
                 <th>Actions</th>
@@ -28,9 +32,12 @@
                 <td>{{ stages.user }}</td>
                 <td>{{ stages.bts }}</td>
                 <td>{{ stages.entreprise }}</td>
+                <td>{{ stages.periode }}</td>
+                <td>{{ stages.theme }}</td>
+                <td>{{ stages.prof }}</td>
+                <td>{{ stages.contact }}</td>
                 <td>{{ stages.dateDebut|date('d-m-Y') }}</td>
                 <td>{{ stages.dateFin|date('d-m-Y') }}</td>
-                <td>{{ stages.theme }}</td>
                 {# <td>{{ stages.user }}</td> #}
                 {# <td>{{ stages.commentaire }}</td> #}
                 <td>
@@ -49,5 +56,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('stage_new') }}">Créer</a>
+   
 {% endblock %}

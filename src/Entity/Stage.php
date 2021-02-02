@@ -18,12 +18,12 @@ class Stage
     private $id;
 
     /**
-     * @ORM\Column(type="date", length=255)
+     * @ORM\Column(type="date", length=255, nullable=true)
      */
     private $date_debut;
 
     /**
-     * @ORM\Column(type="date", length=255)
+     * @ORM\Column(type="date", length=255, nullable=true)
      */
     private $date_fin;
 
@@ -54,6 +54,24 @@ class Stage
      * @ORM\JoinColumn(nullable=false)
      */
     private $bts;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Prof", inversedBy="stages")
+     */
+    private $prof;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Contact", inversedBy="stages")
+     */
+    private $contact;
+
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Periode", inversedBy="stages")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $periode;
 
     public function getId(): ?int
     {
@@ -143,4 +161,44 @@ class Stage
 
         return $this;
     }
+
+    public function getProf(): ?Prof
+    {
+        return $this->prof;
+    }
+
+    public function setProf(?Prof $prof): self
+    {
+        $this->prof = $prof;
+
+        return $this;
+    }
+
+    public function getContact(): ?Contact
+    {
+        return $this->contact;
+    }
+
+    public function setContact(?Contact $contact): self
+    {
+        $this->contact = $contact;
+
+        return $this;
+    }
+    
+    
+
+
+    public function getPeriode(): ?Periode
+    {
+        return $this->periode;
+    }
+
+    public function setPeriode(?Periode $periode): self
+    {
+        $this->periode = $periode;
+
+        return $this;
+    }
+
 }

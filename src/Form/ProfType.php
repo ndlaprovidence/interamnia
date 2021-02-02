@@ -2,26 +2,26 @@
 
 namespace App\Form;
 
-use App\Entity\Periode;
+use App\Entity\Prof;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 
-class PeriodeType extends AbstractType
+class ProfType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom_periode')
-            ->add('date_debut')
-            ->add('date_fin');
+            ->add('nom')
+            ->add('prenom')
+            ->add('en_activite')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Periode::class,
+            'data_class' => Prof::class,
         ]);
     }
 }

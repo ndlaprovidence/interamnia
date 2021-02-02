@@ -7,10 +7,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="tbl_periode")
- * @ORM\Entity(repositoryClass="App\Repository\PeriodeRepository")
+ * @ORM\Table(name="tbl_prof")
+ * @ORM\Entity(repositoryClass="App\Repository\ProfRepository")
  */
-class Periode
+class Prof
 {
     /**
      * @ORM\Id()
@@ -20,22 +20,22 @@ class Periode
     private $id;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length=255)
      */
-    private $date_debut;
+    private $nom;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length=255)
      */
-    private $date_fin;
+    private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $nom_periode;
+    private $en_activite;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Stage", mappedBy="periode", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Stage", mappedBy="prof")
      */
     private $stages;
 
@@ -49,45 +49,41 @@ class Periode
         return $this->id;
     }
 
-    public function getDateDebut(): ?\DateTimeInterface
+    public function getNom(): ?string
     {
-        return $this->date_debut;
+        return $this->nom;
     }
 
-    public function setDateDebut(\DateTimeInterface $date_debut): self
+    public function setNom(string $nom): self
     {
-        $this->date_debut = $date_debut;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getDateFin(): ?\DateTimeInterface
+    public function getPrenom(): ?string
     {
-        return $this->date_fin;
+        return $this->prenom;
     }
 
-    public function setDateFin(\DateTimeInterface $date_fin): self
+    public function setPrenom(string $prenom): self
     {
-        $this->date_fin = $date_fin;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
-    public function getNomPeriode(): ?string
+    public function getEnActivite(): ?int
     {
-        return $this->nom_periode;
+        return $this->en_activite;
     }
 
-    public function setNomPeriode(?string $nom_periode): self
+    public function setEnActivite(?int $en_activite): self
     {
-        $this->nom_periode = $nom_periode;
+        $this->en_activite = $en_activite;
 
         return $this;
     }
-    public function __toString() {
-        return $this->nom_periode;
-    }
-    
 
     /**
      * @return Collection|Stage[]
@@ -101,27 +97,25 @@ class Periode
     {
         if (!$this->stages->contains($stage)) {
             $this->stages[] = $stage;
-            $stage->setPeriode($this);
+            $stage->setProfId($this);
         }
 
         return $this;
     }
-
-   
-
 
     public function removeStage(Stage $stage): self
     {
         if ($this->stages->contains($stage)) {
             $this->stages->removeElement($stage);
             // set the owning side to null (unless already changed)
-            if ($stage->getPeriode() === $this) {
-                $stage->setPeriode(null);
+            if ($stage->getProfId() === $this) {
+                $stage->setProfId(null);
             }
         }
 
         return $this;
     }
-
-   
+    public function __toString() {
+        return $this->nom. ' '.$this->prenom ;
+    }
 }
