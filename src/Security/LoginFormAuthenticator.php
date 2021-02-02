@@ -71,6 +71,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $credentials_login = $credentials['login'];
         dump($credentials_login);
 
+
+        /* DEBUT - à commenter, si pas de serveur LDAP */
+        /*
         $ldapconn = ldap_connect("ldap://172.16.122.250") or die ("Impossible de se connecter au serveur LDAP.");
 
         if ($ldapconn) {
@@ -177,7 +180,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             } else {
                 dump("Connexion LDAP échouée !");
             }
-        }
+        } 
+        */
+        /* FIN - à commenter, si pas de serveur LDAP */
+
         return $user;
     }
 
