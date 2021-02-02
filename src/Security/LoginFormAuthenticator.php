@@ -72,8 +72,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         dump($credentials_login);
 
 
-        /* DEBUT - à commenter, si pas de serveur LDAP */
-        /*
+        /* DEBUT - à commenter, si PAS de serveur LDAP */
         $ldapconn = ldap_connect("ldap://172.16.122.250") or die ("Impossible de se connecter au serveur LDAP.");
 
         if ($ldapconn) {
@@ -181,8 +180,23 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
                 dump("Connexion LDAP échouée !");
             }
         } 
+        /* FIN - à commenter, si PAS de serveur LDAP */
+
+        /* DEBUT - à commenter, si CONNEXION à un serveur LDAP */
+        /*
+        $token = new CsrfToken('authenticate', $credentials['csrf_token']);
+        if (!$this->csrfTokenManager->isTokenValid($token)) {
+            throw new InvalidCsrfTokenException();
+        }
+
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['login' => $credentials['login']]);
+
+        if (!$user) {
+            // fail authentication with a custom error
+            throw new CustomUserMessageAuthenticationException('Login could not be found.');
+        }
         */
-        /* FIN - à commenter, si pas de serveur LDAP */
+        /* FIN - à commenter, si CONNEXION à un serveur LDAP */
 
         return $user;
     }
