@@ -25,10 +25,10 @@ class StageType extends AbstractType
             ->add('prof')
 
             ->add('date_debut', DateType::class, [
-                'widget' => 'choice',
+                'widget' => 'single_text',
             ])
             ->add('date_fin', DateType::class, [
-                'widget' => 'choice',
+                'widget' => 'single_text',
             ])
 
             
