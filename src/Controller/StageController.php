@@ -48,7 +48,7 @@ class StageController extends AbstractController
             $search = new RechercheStage();
             $form = $this->createForm(RechercheStageType::class, $search);
             $form->handleRequest($request);
-
+            
             $stages = $stageRepository->findAllVisibleQuery($search);
 
             return $this->render('stage/index.html.twig', [

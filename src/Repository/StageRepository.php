@@ -24,7 +24,7 @@ class StageRepository extends ServiceEntityRepository
     /**
      * @return Query
      */
-    public function findAllVisibleQuery(RechercheStage $search)
+    public function findAllVisibleQuery(RechercheStage $search, string $orderBy = NULL)
     {
         $emConfig = $this->getEntityManager()->getConfiguration();
         $emConfig->addCustomDatetimeFunction('YEAR', 'DoctrineExtensions\Query\Mysql\Year');
@@ -65,6 +65,9 @@ class StageRepository extends ServiceEntityRepository
                 ->setParameter('btsStage', '%' . $search->getBtsStage() . '%');
         }
 
+        if (isset($orderBy)) {
+            $query->orderBy($orderBy, 'ASC');
+        }
         return $query->getQuery()->getResult();
     }
 

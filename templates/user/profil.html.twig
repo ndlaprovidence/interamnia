@@ -26,11 +26,20 @@
                     <td>{{ profil.date_fin|date('d-m-Y') }}</td>
                     <td>{{ profil.theme }}</td>
                 </tr>
+
+
             {% endfor %}
+            
         </tbody>
     </table>
+    <table class="table">
+        <thead>
+            <td>     
+                <a title="Retour" href="{{ path('user_index') }}"<button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i>            </td>
+        </thead>
+    </table>      
 
-    <a href="{{ path('user_index') }}">Retour</a>
+
 
     {# {% if is_granted('ROLE_SUPER_ADMIN') %}
         <a href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">Modifier</a>

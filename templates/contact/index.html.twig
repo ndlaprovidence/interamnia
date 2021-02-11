@@ -4,7 +4,8 @@
 
 {% block body %}
     <h1>Liste des contacts</h1>
-    <a href="{{ path('contact_new') }}">Créer</a>
+    <a href="{{ path('contact_new') }}" button class="btn btn-primary" orderBy="u.nom" >Créer</button></a>
+
     <table class="table">
         <thead>
             <tr>
@@ -21,11 +22,16 @@
                 <td>{{ contact.nom }}</td>
                 <td>{{ contact.prenom }}</td>
                 <td>{{ contact.telephone }}</td>
-                <td>{{ contact.email }}</td>
+                <td>{{ contact.email }}</td>                                                                   
                 <td>
-                    <a href="{{ path('contact_show', {'id': contact.id}) }}">Afficher</a>
-                    <a href="{{ path('contact_edit', {'id': contact.id}) }}">Modifier</a>
-                </td>
+                    <td>
+                        <a title="Afficher" href="{{ path('contact_show', {'id': contact.id}) }}"<button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> </button></a>        
+                    </td>                    
+                    <td>                    
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <a title="Modifier" href="{{ path('contact_edit', {'id': contact.id}) }}"<button class="btn btn-primary"><i class="fa fa-pencil"aria-hidden="true"></i></button></a>
+                        {% endif %}
+                    </td>
             </tr>
         {% else %}
             <tr>

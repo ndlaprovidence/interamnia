@@ -4,7 +4,8 @@
 
 {% block body %}
     <h1>BTS</h1>
-    <a href="{{ path('b_t_s_new') }}">Créer</a>
+    <a href="{{ path('b_t_s_new') }}" button class="btn btn-primary" orderBy="u.nom" >Créer</button></a>
+
     <table class="table">
         <thead>
             <tr>
@@ -18,9 +19,15 @@
             <tr>
                 <td>{{ b_t.nom }}</td>
                 <td>{{ b_t.specialisation }}</td>
-                <td>
-                    <a href="{{ path('b_t_s_show', {'id': b_t.id}) }}">Afficher</a>
-                    <a href="{{ path('b_t_s_edit', {'id': b_t.id}) }}">Modifier</a>
+                <td>                
+                    <td>
+                        <a title="Afficher" href="{{ path('b_t_s_show', {'id': b_t.id}) }}"<button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> </button></a>        
+                    </td>                    
+                    <td>                    
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <a title="Modifier" href="{{ path('b_t_s_edit', {'id': b_t.id}) }}"<button class="btn btn-primary"><i class="fa fa-pencil"aria-hidden="true"></i></button></a>                                                 
+                        {% endif %}
+                    </td>                                                        
                 </td>
             </tr>
         {% else %}

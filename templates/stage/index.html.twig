@@ -8,11 +8,11 @@
 
     <h1>Stages</h1>
 
-    <a href="{{ path('stage_new') }}">Créer</a>
+    <a href="{{ path('stage_new') }}" button class="btn btn-primary" orderBy="u.nom" >Créer</button></a>
     <table class="table">
         <thead>
             <tr>
-                <th>Nom</th>
+                <th><button class="btn btn-primary" orderBy="u.nom">Nom</button></th>
                 <th>BTS</th>
                 <th>Entreprise</th>  
                 <th>Période</th>         

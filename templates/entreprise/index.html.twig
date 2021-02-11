@@ -28,8 +28,8 @@
 
     <h1>Entreprise</h1>
 
-    {% if is_granted('ROLE_SUPER_ADMIN') %}
-        <a href="{{ path('entreprise_new') }}">Créer</a>
+    {% if is_granted('ROLE_SUPER_ADMIN') %}        
+        <a href="{{ path('entreprise_new') }}" button class="btn btn-primary" orderBy="u.nom" >Créer</button></a>
     {% endif %}
     <table class="table">
         <thead>
@@ -61,11 +61,17 @@
                 <td>{{ entreprise.email }}</td>
                 <td>{{ entreprise.activite }}</td>
                 <td>
-                    <a href="{{ path('entreprise_show', {'id': entreprise.id}) }}">Afficher</a>
-                    {% if is_granted('ROLE_SUPER_ADMIN') %}
-                        <a href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">Modifier</a>
-                        <a href="{{ path('entreprise_liste_stagiaire', {'id': entreprise.id}) }}">Consulter la liste des stagiaires</a>
-                    {% endif %}
+                    <td>
+                        <a title="Afficher" href="{{ path('entreprise_show', {'id': entreprise.id}) }}"<button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> </button></a>        
+                    </td>                    
+                    <td>                    
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <a title="Modifier" href="{{ path('entreprise_edit', {'id': entreprise.id}) }}"<button class="btn btn-primary"><i class="fa fa-pencil"aria-hidden="true"></i></button></a>                            
+                     <td>        
+                            <a title="Consulter la liste des stagiaires" href="{{ path('entreprise_liste_stagiaire', {'id': entreprise.id}) }}"<button class="btn btn-primary"><i class="fa fa-user-circle" aria-hidden="true"></i>                            
+                    </td>   
+                        {% endif %}
+                    </td>
                 </td>
             </tr>
         {% else %}

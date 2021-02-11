@@ -23,12 +23,18 @@
                 <th>En_activite</th>
                 <td>{{ prof.enActivite }}</td>
             </tr>
+                <td>
+                <a title="Retour" href="{{ path('prof_index') }}"<button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+                </td>
+                <td>
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}        
+                        <a title="Modifier" href="{{ path('prof_edit', {'id': prof.id}) }}"<button class="btn btn-primary"><i class="fa fa-pencil"aria-hidden="true"></i></button></a>
+                    {% endif %}
+                </td>
+            
         </tbody>
     </table>
 
-    <a href="{{ path('prof_index') }}">back to list</a>
-
-    <a href="{{ path('prof_edit', {'id': prof.id}) }}">edit</a>
 
     {{ include('prof/_delete_form.html.twig') }}
 {% endblock %}

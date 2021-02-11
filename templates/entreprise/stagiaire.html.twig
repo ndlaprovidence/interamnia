@@ -20,10 +20,11 @@
                 </tr>
             {% endfor %}
         </tbody>
+        <td> 
+            <a title="Retour" href="{{ path('entreprise_index') }}"<button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </td>
     </table>
-
-    <a href="{{ path('entreprise_index') }}">Retour</a>
-
+    
     {# {% if is_granted('ROLE_SUPER_ADMIN') %}
         <a href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">Modifier</a>
     {% endif %}

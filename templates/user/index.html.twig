@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Utilisateur</h1>
-    <a href="{{ path('user_new') }}">Créer</a>
+    <a href="{{ path('user_new') }}" button class="btn btn-primary" orderBy="u.nom" >Créer</button></a>
     <table class="table">
         <thead>
             <tr>
@@ -22,10 +22,13 @@
                 <td>{{ user.prenom }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">Afficher</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">Modifier</a>
-                    <a href="{{ path('user_profil', {'id': user.id}) }}">Consulter le profil de l'utilisateur</a>
+                <td>                    
+                    <a title="Afficher" href="{{ path('user_show', {'id': user.id}) }}"<button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> </button></a>        
+                    
+                    <a title="Modifier" href="{{ path('user_edit', {'id': user.id}) }}"<button class="btn btn-primary"><i class="fa fa-pencil"aria-hidden="true"></i></button></a>
+
+                    <a title="Consulter la liste des stagiaires" href="{{ path('user_profil', {'id': user.id}) }}"<button class="btn btn-primary"><i class="fa fa-user-circle" aria-hidden="true"></i>                            
+                    
                 </td>
             </tr>
         {% else %}
