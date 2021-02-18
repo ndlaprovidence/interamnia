@@ -51,12 +51,18 @@
                 <th>Commentaire</th>
                 <td>{{ stage.commentaire }}</td>
             </tr> #}
+         <td>
+        <a title="Retour" href="{{ path('entreprise_index') }}"<button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+    </td>
+
+    <td>
+        <a title="Modifier" href="{{ path('stage_edit', {'id': stage.id}) }}"<button class="btn btn-primary"><i class="fa fa-pencil"aria-hidden="true"></i></button></a>
+    </td>
         </tbody>
     </table>
 
-    <a href="{{ path('stage_index') }}">Retour</a>
+   
 
-    <a href="{{ path('stage_edit', {'id': stage.id}) }}">Modifier</a>
 
     {{ include('stage/_delete_form.html.twig') }}
 {% endblock %}

@@ -62,6 +62,11 @@ class Entreprise
      */
     private $activite;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $validee;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -177,5 +182,17 @@ class Entreprise
 
     public function __toString() {
         return $this->nom;
+    }
+
+    public function getValidee(): ?bool
+    {
+        return $this->validee;
+    }
+
+    public function setValidee(bool $validee): self
+    {
+        $this->validee = $validee;
+
+        return $this;
     }
 }

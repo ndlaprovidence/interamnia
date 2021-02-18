@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stage index{% endblock %}
+
+{% block body %}
+
+    {{ include('stage/search.html.twig') }}
+
+    <h1>Stages</h1>
+
+     
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>BTS</th>
+                <th>Entreprise</th>  
+                <th>Période</th>         
+                <th>Thème du stage</th>
+                <th>Nom Professeurs</th>
+                <th>Contact</th>
+                <th>Date de début</th> 
+                <th>Date de fin</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stages in stages %}
+            <tr>
+                <td>{{ stages.user }}</td>
+                <td>{{ stages.bts }}</td>
+                <td>{{ stages.entreprise }}</td>
+                <td>{{ stages.periode }}</td>
+                <td>{{ stages.theme }}</td>
+                <td>{{ stages.prof }}</td>
+                <td>{{ stages.contact }}</td>
+                <td>{{ stages.dateDebut|date('d-m-Y') }}</td>
+                <td>{{ stages.dateFin|date('d-m-Y') }}</td>                
+                <td>
+                                        
+                    <td>                    
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <a title="Modifier" href="{{ path('stage_edit', {'id': stages.id}) }}"<button class="btn btn-primary"><i class="fa fa-check-circle-o" aria-hidden="true"></i></a>                                                 
+                        {% endif %}
+                    </td>
+                </td>
+                    
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucune données trouvées</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+{% endblock %}

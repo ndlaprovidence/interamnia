@@ -43,16 +43,23 @@
                 <th>Activité</th>
                 <td>{{ entreprise.activite }}</td>
             </tr>
+
+
+            <td>
+                <a title="Retour" href="{{ path('entreprise_index') }}"<button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </td>
+            <td>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}        
+                    <a title="Modifier" href="{{ path('entreprise_edit', {'id': entreprise.id}) }}"<button class="btn btn-primary"><i class="fa fa-pencil"aria-hidden="true"></i></button></a>
+                {% endif %}
+            </td>
         </tbody>
     </table>
 
-    <a href="{{ path('entreprise_index') }}">Retour</a>
-
-    {% if is_granted('ROLE_SUPER_ADMIN') %}
-        <a href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">Modifier</a>
-    {% endif %}
-
-    {% if is_granted('ROLE_SUPER_ADMIN') %}
-        {{ include('entreprise/_delete_form.html.twig') }}
-    {% endif %}
+    
+        
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                {{ include('entreprise/_delete_form.html.twig') }} 
+            {% endif %}
+        
 {% endblock %}

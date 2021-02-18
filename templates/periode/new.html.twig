@@ -22,6 +22,12 @@
     <h1>Créer une nouvelle période</h1>
 
     {{ include('periode/_form.html.twig') }}
+    <table class="table">
+        <thead>
+            <td>     
+                <a title="Retour" href="{{ path('periode_index') }}"<button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </td>
+        </thead>
+    </table>
 
-    <a href="{{ path('periode_index') }}">Retour</a>
 {% endblock %}
