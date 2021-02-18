@@ -9,7 +9,6 @@
     <h1>Stages</h1>
 
      
-    <a href="{{ path('stage_new') }}" button class="btn btn-primary" orderBy="u.nom" >Créer</button></a>
     
     <table class="table">
         <thead>
@@ -39,20 +38,14 @@
                 <td>{{ stages.dateDebut|date('d-m-Y') }}</td>
                 <td>{{ stages.dateFin|date('d-m-Y') }}</td>                
                 <td>
-                    <td>
-                    
-                    <a title="Afficher" href="{{ path('stage_show', {'id': stages.id}) }}"<button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> </button></a>        
-                    </td>
-                    <td>
-                    <a title="Modifier" href="{{ path('stage_edit', {'id': stages.id}) }}"<button class="btn btn-primary"><i class="fa fa-pencil"aria-hidden="true"></i></button></a>
-                    </td>
-                    <td>                                        
-                    
-                    {% if is_granted('ROLE_SUPER_ADMIN') %} 
-                        <a title="Imprimer" href="{{ path('stage_pdf') }}"<button class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i></i></button></a>        
-                    {% endif %}
+                                        
+                    <td>                    
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <a title="Modifier" href="{{ path('stage_edit', {'id': stages.id}) }}"<button class="btn btn-primary"><i class="fa fa-check-circle-o" aria-hidden="true"></i></a>                                                 
+                        {% endif %}
                     </td>
                 </td>
+                    
             </tr>
         {% else %}
             <tr>

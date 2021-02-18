@@ -12,10 +12,15 @@ use App\Form\UserType;
 use App\Form\StageType;
 use App\Entity\RechercheStage;
 use App\Form\RechercheStageType;
+use App\Entity\RechercheEntreprise;
 use App\Repository\StageRepository;
+use App\Form\RechercheEntrepriseType;
+use App\Repository\ContactRepository;
+use App\Repository\EntrepriseRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -23,6 +28,45 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class StageController extends AbstractController
 {
+
+     /**
+     * @Route("/validee", name="stage_validee", methods={"GET","POST"})
+     * 
+     * @IsGranted("ROLE_SUPER_ADMIN")
+     */
+    public function validee(StageRepository $stageRepository, Request $request): Response
+    {
+        $user = $this->getUser();
+
+        if (empty($user->getEmail())) {
+            $form = $this->createForm(UserType::class, $user, ['email_only' => true]);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirectToRoute('stage_index');
+            }
+
+            return $this->render('user/set-email.html.twig', [
+                'user' => $user,
+                'form' => $form->createView(),
+            ]);
+        } else {
+            $search = new RechercheStage();
+            $form = $this->createForm(RechercheStageType::class, $search);
+            $form->handleRequest($request);
+            
+            $stages = $stageRepository->findAllVisibleQuery($search, Null, false);
+
+            return $this->render('stage/validee.html.twig', [
+                'stages' => $stages,
+                'formSearch' => $form->createView(),
+            ]);
+        }
+    }
+
+    
     /**
      * @Route("/", name="stage_index", methods={"GET","POST"})
      */
@@ -64,7 +108,19 @@ class StageController extends AbstractController
     public function new(Request $request): Response
     {
         $stage = new Stage();
-        $form = $this->createForm(StageType::class, $stage);
+
+        
+        $user = $this->getUser();
+        
+        $roles = $user->getRoles();
+        
+        if (in_array("ROLE_SUPER_ADMIN",$roles)){
+            $form = $this->createForm(StageType::class, $stage, array('form_type' => 'prof'));
+        }
+        else {
+            $form = $this->createForm(StageType::class, $stage);        
+        }
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -146,4 +202,6 @@ class StageController extends AbstractController
 
         return $this->redirectToRoute('stage_index');
     }
+
+   
 }

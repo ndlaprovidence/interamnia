@@ -73,6 +73,11 @@ class Stage
      */
     private $periode;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $validee;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -197,6 +202,18 @@ class Stage
     public function setPeriode(?Periode $periode): self
     {
         $this->periode = $periode;
+
+        return $this;
+    }
+
+    public function getValidee(): ?bool
+    {
+        return $this->validee;
+    }
+
+    public function setValidee(bool $validee): self
+    {
+        $this->validee = $validee;
 
         return $this;
     }
