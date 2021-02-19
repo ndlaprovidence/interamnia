@@ -1,0 +1,25 @@
+.ClassecssNdlp{
+    display: block;
+    color: white;
+    padding: 2px;
+    margin: auto;
+    margin-top: 10%;
+    width: 450px;
+    border: 1px solid black;
+    margin-bottom:50px ;
+
+
+
+}
+.TexPres{
+    display: block;
+    max-width: 700px;
+    text-align: center;
+    margin: auto;
+    font-size: 40px;
+}
+.Tablelogo{
+    position: fixed;
+    top : 100px;
+    left: 50px;
+}
